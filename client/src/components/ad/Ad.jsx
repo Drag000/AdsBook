@@ -32,7 +32,7 @@ export default function Ad() {
                 Some quick example text to build on the card title and make up the
                 bulk of the card's content.
               </Card.Text>
-              <Button as={Link} to="/addetails" variant="primary">Details</Button>
+              <Button as={Link} to="/ads/:adId/details" variant="primary">Details</Button>
             </Card.Body>
           </Col>
         </Row>

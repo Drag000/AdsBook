@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
-import ListGroup from 'react-bootstrap/ListGroup';
+
 
 export default function AdDetails() {
    return(

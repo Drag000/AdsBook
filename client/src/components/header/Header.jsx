@@ -6,13 +6,13 @@ function Header() {
   return (
     <Nav className="custom-navigation fixed-top bg-body-tertiary" variant="underline" defaultActiveKey="/home">
       <Nav.Item>
-        <Nav.Link >Home</Nav.Link>
+        <Nav.Link as={Link} to="/">Home</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link >Create ad</Nav.Link>
+        <Nav.Link as={Link} to="/ads/create">Create ad</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link >My ads</Nav.Link>
+        <Nav.Link as={Link} to="/ads">My ads</Nav.Link>
       </Nav.Item>
 
       <Nav.Item>
