@@ -1339,6 +1339,41 @@
     	}
     };
     var seedData = {
+        ads: {
+    		"53d4dbf5-7f41-47ba-b485-43eccb91cb95": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                title: "Selling my table",
+    			location: "Sofia",
+    			condition: "used",
+    			description: "Medium table",
+    			price: 235,
+    			img: "./images/table.png",
+    			_createdOn: 1615545143015,
+    			_id: "53d4dbf5-7f41-47ba-b485-43eccb91cb95"
+    		},
+    		"f5929b5c-bca4-4026-8e6e-c09e73908f77": {
+    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                title: "Used sofa",
+    			location: "Burgas",
+    			condition: "new",
+    			description: "Three-person sofa, blue",
+    			price: 1200,
+    			img: "./images/sofa.jpg",
+    			_createdOn: 1615545572296,
+    			_id: "f5929b5c-bca4-4026-8e6e-c09e73908f77"
+    		},
+    		"c7f51805-242b-45ed-ae3e-80b68605141b": {
+    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+    			title: "Greate chair",
+    			location: "Varna",
+    			condition: "used",
+    			description: "Dining chair",
+    			price: 180,
+    			img: "./images/chair.jpg",
+    			_createdOn: 1615546332126,
+    			_id: "c7f51805-242b-45ed-ae3e-80b68605141b"
+    		}
+    	},
     	recipes: {
     		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
@@ -1403,7 +1438,7 @@
     	},
     	records: {
     		i01: {
-    			name: "John1",
+    			name: "John1111",
     			val: 1,
     			_createdOn: 1613551388703
     		},

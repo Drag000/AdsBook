@@ -11,7 +11,7 @@ export default function CreateAd() {
                     />
                 </div>
                 <div className="mb-3">
-                    <label>Category</label>
+                    <label>Condition</label>
                     <input
                         type="text"
                         className="form-control"
@@ -19,9 +19,17 @@ export default function CreateAd() {
                     />
                 </div>
                 <div className="mb-3">
-                    <label>Category</label>
+                    <label>Location</label>
                     <input
                         type="text"
+                        className="form-control"
+                        placeholder=" "
+                    />
+                </div>
+                <div className="mb-3">
+                    <label>Price</label>
+                    <input
+                        type="number"
                         className="form-control"
                         placeholder=" "
                     />
@@ -32,6 +40,14 @@ export default function CreateAd() {
                         type="textarea"
                         className="form-control"
                         placeholder="Please describe.."
+                    />
+                </div>
+                <div className="mb-3">
+                    <label>Photo</label>
+                    <input
+                        type="url"
+                        className="form-control"
+                        placeholder="Please add url"
                     />
                 </div>
                 

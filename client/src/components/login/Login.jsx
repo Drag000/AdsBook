@@ -11,7 +11,7 @@ export default function Login() {
 
     const loginHandler = async ({ email, password }) => {
         try{
-            await login(email, password)
+            await login(email, password);
             navigate('/home');
         } catch (err) {
             console.log(err.message);
@@ -63,7 +63,7 @@ export default function Login() {
                     </div>
                 </div> */}
             <div className="d-grid">
-                <button type="submit" className="btn btn-primary" value="Login">
+                <button type="submit" className="btn btn-primary">
                     Submit
                 </button>
             </div>

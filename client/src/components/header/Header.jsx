@@ -6,7 +6,7 @@ function Header() {
   return (
     <Nav className="custom-navigation fixed-top bg-body-tertiary" variant="underline" defaultActiveKey="/home">
       <Nav.Item>
-        <Nav.Link as={Link} to="/">Home</Nav.Link>
+        <Nav.Link as={Link} to="/home">Home</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link as={Link} to="/ads/create">Create ad</Nav.Link>
@@ -14,6 +14,14 @@ function Header() {
       <Nav.Item>
         <Nav.Link as={Link} to="/ads">My ads</Nav.Link>
       </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+      </Nav.Item>
+      
+      <Nav.Item>
+        <Nav.Link as={Link} to="/register">Register</Nav.Link>
+      </Nav.Item>
+
 
       <Nav.Item>
         <Nav.Link eventKey="disabled" disabled>

@@ -4,26 +4,30 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function Ad() {
+export default function Ad({
+  _id,
+  title,
+  imageURL,
+}) {
   return (
     <Card >
       <Container >
         <Row>
           <Col xs lg="3">
-            <Card.Img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD5KVZ171f9ejHWPRxKOqjPQr7uROsVKEmidD1febV2sh9O_CNpbPFZSvcRLfbXGIwWrI&usqp=CAU" />
+            <Card.Img src={imageURL} />
           </Col>
           <Col>
             <Card.Body>
               <Card.Title>
                 <Container >
                   <Row>
-                    <Col xs lg="3"> 
-                    <Button variant="info">Uploaded by..</Button>{' '}
+                    <Col xs lg="3">
+                      <Button variant="info">Uploaded by..</Button>{' '}
                     </Col>
-                    <Col> 
-                      Card Title
+                    <Col>
+                      {title}
                     </Col>
                   </Row>
                 </Container>
@@ -32,7 +36,7 @@ export default function Ad() {
                 Some quick example text to build on the card title and make up the
                 bulk of the card's content.
               </Card.Text>
-              <Button as={Link} to="/ads/:adId/details" variant="primary">Details</Button>
+              <Button as={Link} to={`/ads/${_id}/details`} variant="primary">Details</Button>
             </Card.Body>
           </Col>
         </Row>

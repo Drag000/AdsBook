@@ -1,31 +1,75 @@
-import Card from 'react-bootstrap/Card';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { useParams } from "react-router-dom";
+import * as adsAPI from '../../api/ads-api'
+
 
 
 export default function AdDetails() {
-   return(
-    <Card className="w-25 m-auto p-3 my-5 border">
-    <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-    <Card.Body>
-      <Card.Title>Card Title</Card.Title>
-      <Card.Text>
-        Some quick example text to build on the card title and make up the
-        bulk of the card's content.
-      </Card.Text>
-    </Card.Body>
-    <ListGroup className="list-group-flush">
-      <ListGroup.Item>Cras justo odio</ListGroup.Item>
-      <ListGroup.Item> </ListGroup.Item>
-      <ListGroup.Item> </ListGroup.Item>
-      <ListGroup.Item>Comments</ListGroup.Item> 
-      <ListGroup.Item>Comments</ListGroup.Item>
-      <Button as={Link} to="#" variant="primary">Add comment</Button>
-    </ListGroup>
-    <Card.Body>
-      <Button as={Link} to="#" variant="primary">Edit</Button>
-      <Button as={Link} to="#" variant="primary">Delete</Button>
-    </Card.Body>
-  </Card>
-   );
+    const { adId } = useParams();
+    const [ad, setAd] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            const result = await adsAPI.getOneAd(adId);
+
+            setAd(result);
+        })();
+    }, []);
+
+
+    return (
+            <div className="card w-25 m-auto p-3 my-5 border" >
+                <h5 className="card-title">{ad.title}</h5>
+                <img src={ad.imageURL} className="card-img-top" alt="..." />
+               
+                <div className="list-group list-group-flush">
+                    <Container >
+                        <Row>
+                            <Col xs lg="3">
+                                Condition
+                            </Col>
+                            <Col>
+                                {ad.condition}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs lg="3">
+                                Location
+                            </Col>
+                            <Col>
+                                {ad.location}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs lg="3">
+                                Price
+                            </Col>
+                            <Col>
+                                {ad.price}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs lg="3">
+                                Description
+                            </Col>
+                            <Col>
+                                {ad.description}
+                            </Col>
+                        </Row>
+                    </Container>
+
+
+                    {/* <li className="list-group-item">A third item</li> */}
+                </div>
+                <div className="card-body">
+                    <Link to="#" className="card-link">Edit</Link>
+                    <Link to="#" className="card-link">Delete</Link>
+                </div>
+            </div>
+    );
 }
