@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:3030/data/ads';
 
 export const getAllAds = async () => {
     const result = await request.get(BASE_URL);
-
+    
     const ads = Object.values(result);
 
     return ads;
@@ -26,10 +26,10 @@ export const createAd = async (adData) => {
     return ad;
 }
 
-const adAPI = {
+const adsAPI = {
     getAllAds,
     getOneAd,
     createAd,
 };
 
-export default adAPI;
+export default adsAPI;

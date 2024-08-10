@@ -1,8 +1,7 @@
-
-import { AuthContext } from '../contexts/authContext';
 import { useContext } from "react";
-import { login } from "../api/auth-api"
-import { register } from "../api/auth-api"
+import { register, login, logout } from "../api/auth-api"
+import { AuthContext} from '../contexts/AuthContext';
+
 
 
 
@@ -32,4 +31,16 @@ export const useRegister = () => {
     }
 
     return registerHandler;
+};
+
+export const useLogout = () => {
+    const { logout: localLogout } = useContext(AuthContext);
+
+    const logoutHandler = async () => {
+        await logout();
+        localLogout();    
+        
+    };
+
+    return logoutHandler;
 };

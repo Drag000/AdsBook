@@ -1,8 +1,8 @@
-import adAPI from "../api/ads-api";
+import adsAPI from "../api/ads-api";
 
 
 export function useCreateAd() {
-    const adCreateHanlder = (adData) => adAPI.createAd(adData);
+    const adCreateHanlder = (adData) => adsAPI.createAd(adData);
 
     return adCreateHanlder;
 }

@@ -1,6 +1,7 @@
 import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
 import Ad from '../ad/Ad';
+
 import { useState, useEffect } from 'react';
 import * as adsAPI from '../../api/ads-api'
 
