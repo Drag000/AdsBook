@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useParams } from "react-router-dom";
-import * as adsAPI from '../../api/ads-api'
 
+import * as adsAPI from '../../api/ads-api'
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 export default function AdDetails() {
@@ -21,55 +22,67 @@ export default function AdDetails() {
         })();
     }, []);
 
+    const { userId } = useContext(AuthContext);
+    
+    let isOwner = false;
+    
+    if (userId === ad._ownerId) {
+        isOwner = true
+    };
+    
 
     return (
-            <div className="card w-25 m-auto p-3 my-5 border" >
-                <h5 className="card-title">{ad.title}</h5>
-                <img src={ad.imageURL} className="card-img-top" alt="..." />
-               
-                <div className="list-group list-group-flush">
-                    <Container >
-                        <Row>
-                            <Col xs lg="3">
-                                Condition
-                            </Col>
-                            <Col>
-                                {ad.condition}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs lg="3">
-                                Location
-                            </Col>
-                            <Col>
-                                {ad.location}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs lg="3">
-                                Price
-                            </Col>
-                            <Col>
-                                {ad.price}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs lg="3">
-                                Description
-                            </Col>
-                            <Col>
-                                {ad.description}
-                            </Col>
-                        </Row>
-                    </Container>
+        <div className="card w-25 m-auto p-3 my-5 border" >
+            <h5 className="card-title">{ad.title}</h5>
+            <img src={ad.imageURL} className="card-img-top" alt="..." />
+
+            <div className="list-group list-group-flush">
+                <Container >
+                    <Row>
+                        <Col xs lg="3">
+                            Condition
+                        </Col>
+                        <Col>
+                            {ad.condition}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs lg="3">
+                            Location
+                        </Col>
+                        <Col>
+                            {ad.location}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs lg="3">
+                            Price
+                        </Col>
+                        <Col>
+                            {ad.price}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs lg="3">
+                            Description
+                        </Col>
+                        <Col>
+                            {ad.description}
+                        </Col>
+                    </Row>
+                </Container>
 
 
-                    {/* <li className="list-group-item">A third item</li> */}
-                </div>
+                {/* <li className="list-group-item">A third item</li> */}
+            </div>
+
+            {isOwner &&
                 <div className="card-body">
                     <Link to="#" className="card-link">Edit</Link>
                     <Link to="#" className="card-link">Delete</Link>
                 </div>
-            </div>
+            }
+
+        </div>
     );
 }

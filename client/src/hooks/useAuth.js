@@ -10,7 +10,7 @@ export const useLogin = () => {
 
     const loginHandler = async (email, password) => {
         const result = await login(email, password);
-
+     
         changeAuthState(result);
 
         return result;
@@ -37,9 +37,12 @@ export const useLogout = () => {
     const { logout: localLogout } = useContext(AuthContext);
 
     const logoutHandler = async () => {
-        await logout();
-        localLogout();    
         
+        await logout();
+        localStorage.removeItem('accessToken');
+        localLogout();
+        
+
     };
 
     return logoutHandler;

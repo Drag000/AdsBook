@@ -41,7 +41,7 @@ function App() {
           <Route path="/ads/:adId/details" element={<AdDetails />} />
           {/* <Route path="/ads/:adId/edit" element={<AdEdit/>}/> */}
           {/* <Route path="/ads/:adId/delete" element={<AdDelete/>}/> */}
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
         <Footer />

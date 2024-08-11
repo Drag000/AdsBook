@@ -18,7 +18,7 @@ export default function CreateAd() {
     const createAdHandler = async (values) => {
         try{
             await createAd(values);
-            navigate('/home');
+            navigate('/');
         } catch (err) {
             console.log(err.message);
         }

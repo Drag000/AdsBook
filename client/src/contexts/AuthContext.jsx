@@ -21,6 +21,8 @@ export function AuthContextProvider(props) {
     };
 
     const logout = () => {
+        
+        
         setAuthState(null);
     };
 
@@ -33,7 +35,6 @@ export function AuthContextProvider(props) {
         logout,
     }
         
-    console.log(`AuthContext contextData: ${contextData.accessToken}`)
     
     return (
         <AuthContext.Provider value={contextData}>

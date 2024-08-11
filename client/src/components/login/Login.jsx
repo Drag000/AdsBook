@@ -10,9 +10,9 @@ export default function Login() {
     const navigate = useNavigate();
 
     const loginHandler = async ({ email, password }) => {
-        try{
+        try {
             await login(email, password);
-         
+
             navigate('/');
         } catch (err) {
             console.log(err.message);
@@ -24,7 +24,7 @@ export default function Login() {
         changeHandler,
         submitHandler,
     } = useForm(initialValues, loginHandler);
-    
+
 
     return (
         <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
