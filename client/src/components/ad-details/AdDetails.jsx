@@ -5,14 +5,22 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { useParams } from "react-router-dom";
+import { useForm } from '../../hooks/useForm';
 
 import * as adsAPI from '../../api/ads-api'
 import { AuthContext } from '../../contexts/AuthContext';
+import { useCreateComment, useGetAllComments } from '../../hooks/useComments';
 
+const initialValues = {
+    text: '',
+};
 
 export default function AdDetails() {
     const { adId } = useParams();
+    const { userId, isAuthenticated } = useContext(AuthContext);
     const [ad, setAd] = useState({});
+    const [comments, setComments, refetchComments] = useGetAllComments(adId);
+    const createComment = useCreateComment();
 
     useEffect(() => {
         (async () => {
@@ -20,17 +28,26 @@ export default function AdDetails() {
 
             setAd(result);
         })();
-    }, []);
+    }, [adId]);
 
-    const { userId } = useContext(AuthContext);
-    
-    let isOwner = false;
-    
-    if (userId === ad._ownerId) {
-        isOwner = true
+
+    const isOwner = userId === ad._ownerId;
+
+    const createCommentHandler = async ({ text }) => {
+        try {
+            await createComment(adId, text);
+            refetchComments();
+        } catch (err) {
+            console.log(err.message);
+        }
     };
-    
 
+    const {
+        values,
+        changeHandler,
+        submitHandler,
+    } = useForm(initialValues, createCommentHandler);
+  
     return (
         <div className="card w-25 m-auto p-3 my-5 border" >
             <h5 className="card-title">{ad.title}</h5>
@@ -83,6 +100,39 @@ export default function AdDetails() {
                 </div>
             }
 
+            <div>
+                <h3>Comments:</h3>
+                <ul>
+                    {comments.length > 0
+                        ? comments.map(comment => (
+                            <li key={comment._id}>
+                                {comment.author.email}: {comment.text}
+                            </li>
+                        ))
+                        : <h3>No Comments</h3>
+                    }
+                </ul>
+            </div>
+
+            {isAuthenticated && (
+                <form className="w-auto m-auto p-3 my-5 border" onSubmit={submitHandler}>
+                    <h5>Add Comment:</h5>
+                    <div className="mb-3">
+                        <label>Comment</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter your comment.."
+                            name="text"
+                            value={values.text}
+                            onChange={changeHandler}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                        Create comment
+                    </button>
+                </form>
+            )}
         </div>
     );
 }

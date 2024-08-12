@@ -14,12 +14,11 @@ export default function Ads() {
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getAllAds();
-
+            
             setAds(result);
         })();
     }, []);
-
-
+    
 
     return (
         <Container className="p-2 my-5 border">

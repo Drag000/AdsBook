@@ -3,10 +3,15 @@ import * as request from './requester'
 const BASE_URL = 'http://localhost:3030/data/ads';
 
 export const getAllAds = async () => {
-    const result = await request.get(BASE_URL);
+    const params = new URLSearchParams({
+        load: `creater=_ownerId:users`,
+    });
+
+    
+    const result = await request.get(`${BASE_URL}?${params.toString()}`);
     
     const ads = Object.values(result);
-
+    
     return ads;
 }
 

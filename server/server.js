@@ -1347,7 +1347,7 @@
     			condition: "used",
     			description: "Medium table",
     			price: 235,
-    			img: "./images/table.png",
+    			imageURL: "./images/table.png",
     			_createdOn: 1615545143015,
     			_id: "53d4dbf5-7f41-47ba-b485-43eccb91cb95"
     		},
@@ -1358,7 +1358,7 @@
     			condition: "new",
     			description: "Three-person sofa, blue",
     			price: 1200,
-    			img: "./images/sofa.jpg",
+    			imageURL: "./images/sofa.jpg",
     			_createdOn: 1615545572296,
     			_id: "f5929b5c-bca4-4026-8e6e-c09e73908f77"
     		},
@@ -1369,7 +1369,7 @@
     			condition: "used",
     			description: "Dining chair",
     			price: 180,
-    			img: "./images/chair.jpg",
+    			imageURL: "./images/chair.jpg",
     			_createdOn: 1615546332126,
     			_id: "c7f51805-242b-45ed-ae3e-80b68605141b"
     		}
@@ -1429,9 +1429,9 @@
     	},
     	comments: {
     		"0a272c58-b7ea-4e09-a000-7ec988248f66": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			content: "Great recipe!",
-    			recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
+    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+    			text: "I am buying it!",
+    			adId: "53d4dbf5-7f41-47ba-b485-43eccb91cb95",
     			_createdOn: 1614260681375,
     			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
     		}

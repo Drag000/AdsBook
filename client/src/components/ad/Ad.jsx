@@ -8,9 +8,13 @@ import { Link } from 'react-router-dom';
 
 export default function Ad({
   _id,
+  _ownerId,
   title,
   imageURL,
-}) {
+  creater,
+}) 
+
+{
   return (
     <Card >
       <Container >
@@ -24,7 +28,7 @@ export default function Ad({
                 <Container >
                   <Row>
                     <Col xs lg="3">
-                      <Button variant="info">Uploaded by..</Button>{' '}
+                      <Button variant="info">Uploaded by: {creater.username} </Button>{' '}
                     </Col>
                     <Col>
                       {title}

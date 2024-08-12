@@ -29,10 +29,10 @@ async function requester(method, url, data) {
     }
 
 
-    console.log('method:', options.method);
-    console.log('options:', options.headers);
+    // console.log('method:', options.method);
+    // console.log('options:', options.headers);
     const response = await fetch(url, options);
-    console.log('response:', response);
+    // console.log('response:', response);
     if (response.status === 204) {
         return;
     }
