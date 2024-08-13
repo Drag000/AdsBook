@@ -3,21 +3,23 @@ import Container from 'react-bootstrap/Container';
 import Ad from '../ad/Ad';
 
 import { useState, useEffect } from 'react';
-import * as adsAPI from '../../api/ads-api'
+// import * as adsAPI from '../../api/ads-api'
+import {useGetAllAds} from '../../hooks/useAds'
 
 
 
 
 export default function Ads() {
-    const [ads, setAds] = useState([]);
+    const [ads] = useGetAllAds();
+    // const [ads, setAds] = useState([]);
 
-    useEffect(() => {
-        (async () => {
-            const result = await adsAPI.getAllAds();
+    // useEffect(() => {
+    //     (async () => {
+    //         const result = await adsAPI.getAllAds();
             
-            setAds(result);
-        })();
-    }, []);
+    //         setAds(result);
+    //     })();
+    // }, []);
     
 
     return (

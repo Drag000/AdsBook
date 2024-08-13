@@ -2,18 +2,33 @@ import * as adsAPI from '../api/ads-api'
 import { useState, useEffect } from "react";
 
 
-export function useGetOneAd (adId) {
-        const [ad, setAd] = useState([]);
-    
+export function useGetOneAd(adId) {
+    const [ad, setAd] = useState([]);
+
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getOneAd(adId);
-            
+
             setAd(result);
         })();
     }, [adId]);
-    
+
     return [ad];
+};
+
+
+export function useGetAllAds() {
+    const [ads, setAds] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const result = await adsAPI.getAllAds();
+
+            setAds(result);
+        })();
+    }, []);
+
+    return [ads];
 };
 
 export function useCreateAd() {
@@ -22,10 +37,10 @@ export function useCreateAd() {
     return adCreateHanlder;
 };
 
-    
-export function useUpdateAd () {
+
+export function useUpdateAd() {
     const adUpdateHanlder = (adId, adData) => adsAPI.updateAd(adId, adData);
 
     return adUpdateHanlder;
 }
-    
+
