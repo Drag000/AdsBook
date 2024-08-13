@@ -12,6 +12,8 @@ import Footer from "./components/footer/Footer"
 import Ad from "./components/ad/Ad"
 import Ads from './components/ads/Ads';
 import AdDetails from './components/ad-details/AdDetails';
+import AdEdit from './components/ad-edit/AdEdit';
+// import AdDelete from './components/ad-delete/AdDelete';
 import CreateAd from './components/ad-create/AdCreate';
 import Logout from './components/logout/Logout';
 import {AuthContextProvider} from "./contexts/AuthContext";
@@ -39,7 +41,7 @@ function App() {
           <Route path="/ads" element={<Ads />} />
           <Route path="/ads/create" element={<CreateAd />} />
           <Route path="/ads/:adId/details" element={<AdDetails />} />
-          {/* <Route path="/ads/:adId/edit" element={<AdEdit/>}/> */}
+          <Route path="/ads/:adId/edit" element={<AdEdit/>}/>
           {/* <Route path="/ads/:adId/delete" element={<AdDelete/>}/> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

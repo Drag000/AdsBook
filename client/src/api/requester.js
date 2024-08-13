@@ -28,7 +28,7 @@ async function requester(method, url, data) {
         options.body = JSON.stringify(data);
     }
 
-
+    
     // console.log('method:', options.method);
     // console.log('options:', options.headers);
     const response = await fetch(url, options);

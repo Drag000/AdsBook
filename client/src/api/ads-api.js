@@ -19,7 +19,7 @@ export const getOneAd = async (adId) => {
     const result = await request.get(`${BASE_URL}/${adId}`);
 
     const ad = result;
-
+    
     return ad;
 }
 
@@ -31,10 +31,18 @@ export const createAd = async (adData) => {
     return ad;
 }
 
+export const removeAd = async (adId) => await request.del(`${BASE_URL}/${adId}`);
+
+export const updateAd = async (adId, adData) => await request.put(`${BASE_URL}/${adId}`, adData);
+
+
 const adsAPI = {
     getAllAds,
     getOneAd,
     createAd,
+    removeAd,
+    updateAd,
+    
 };
 
 export default adsAPI;

@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -16,6 +17,7 @@ const initialValues = {
 };
 
 export default function AdDetails() {
+    const navigate = useNavigate();
     const { adId } = useParams();
     const { userId, isAuthenticated } = useContext(AuthContext);
     const [ad, setAd] = useState({});
@@ -47,6 +49,22 @@ export default function AdDetails() {
         changeHandler,
         submitHandler,
     } = useForm(initialValues, createCommentHandler);
+    
+    const adDeleteHandler = async () => {
+        const isConfirmed = confirm(`Are you sure you want to delete ${ad.title} ad?`)
+        
+        if (!isConfirmed) {
+            return;
+        };
+        
+        try {
+            await adsAPI.removeAd(adId);
+            navigate('/');
+        } catch (err) {
+            console.log(err.message);
+        }
+        
+    }
   
     return (
         <div className="card w-25 m-auto p-3 my-5 border" >
@@ -95,8 +113,8 @@ export default function AdDetails() {
 
             {isOwner &&
                 <div className="card-body">
-                    <Link to="#" className="card-link">Edit</Link>
-                    <Link to="#" className="card-link">Delete</Link>
+                    <Link to={`/ads/${adId}/edit`} className="card-link">Edit</Link>
+                    <Link to="#" onClick={adDeleteHandler} className="card-link">Delete</Link>
                 </div>
             }
 
