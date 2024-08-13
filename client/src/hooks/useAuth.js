@@ -37,12 +37,11 @@ export const useLogout = () => {
     const { logout: localLogout } = useContext(AuthContext);
 
     const logoutHandler = async () => {
-        
         await logout();
-        localStorage.removeItem('accessToken');
+        // localStorage.removeItem('accessToken');
         localLogout();
-        
-
+    
+            
     };
 
     return logoutHandler;

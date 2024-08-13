@@ -17,6 +17,7 @@ import AdEdit from './components/ad-edit/AdEdit';
 import CreateAd from './components/ad-create/AdCreate';
 import Logout from './components/logout/Logout';
 import {AuthContextProvider} from "./contexts/AuthContext";
+import PrivateGuard from './components/common/PrivateGuard';
 
 
 
@@ -31,19 +32,26 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-
+        
 
           <Route path="/profile/:profileId/details" />
           {/* <Route path="/profile/:profileId/edit" /> */}
           {/* <Route path="/profile/:profileId/delete" /> */}
 
           <Route path="/ads" element={<Ads />} />
-          <Route path="/ads/create" element={<CreateAd />} />
+          
           <Route path="/ads/:adId/details" element={<AdDetails />} />
-          <Route path="/ads/:adId/edit" element={<AdEdit/>}/>
+          
           {/* <Route path="/ads/:adId/delete" element={<AdDelete/>}/> */}
           <Route path="*" element={<Navigate to="/" />} />
+          
+          <Route element={<PrivateGuard/>}>
+            <Route path="/ads/create" element={<CreateAd />} />
+            <Route path="/ads/:adId/edit" element={<AdEdit/>}/>
+            <Route path="/logout" element={<Logout />} />
+          </Route>
+          
+          
         </Routes>
 
         <Footer />

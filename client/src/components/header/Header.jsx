@@ -9,13 +9,13 @@ function Header() {
 
 
 
-return (
-  <Nav className="custom-navigation fixed-top bg-body-tertiary" variant="underline" defaultActiveKey="/">
-    <Nav.Item>
-      <Nav.Link as={Link} to="/">Home</Nav.Link>
-    </Nav.Item>
+  return (
+    <Nav className="custom-navigation fixed-top bg-body-tertiary" variant="underline" defaultActiveKey="/">
+      <Nav.Item>
+        <Nav.Link as={Link} to="/">Home</Nav.Link>
+      </Nav.Item>
 
-    {isAuthenticated
+      {isAuthenticated
       ? (
         <>
           <Nav.Item>
@@ -44,13 +44,14 @@ return (
 
 
 
-    <Nav.Item>
-      {/* <Nav.Link eventKey="disabled" disabled>
+
+      <Nav.Item>
+        {/* <Nav.Link eventKey="disabled" disabled>
           Disabled
         </Nav.Link> */}
-    </Nav.Item>
-  </Nav>
-);
+      </Nav.Item>
+    </Nav>
+  );
 }
 
 export default Header;
