@@ -16,7 +16,11 @@ export const getAllAds = async () => {
 
 
 export const getOneAd = async (adId) => {
-    const result = await request.get(`${BASE_URL}/${adId}`);
+    const params = new URLSearchParams({
+        load: `creater=_ownerId:users`,
+    });
+
+    const result = await request.get(`${BASE_URL}/${adId}?${params.toString()}`);
 
     const ad = result;
     

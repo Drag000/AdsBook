@@ -1,5 +1,8 @@
 .custom-navigation {
+    display: flex;
     justify-content: flex-end;
     padding-right: 140px;
     gap: 50px;
+    position: sticky;
+    top: 0;
 }

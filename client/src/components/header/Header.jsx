@@ -6,8 +6,9 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 function Header() {
   const { isAuthenticated } = useContext(AuthContext);
-
-
+  // const submitLogoutHandler = async (e) => {
+  //   e.preventDefault(); onClick={submitLogoutHandler}
+  // }
 
   return (
     <Nav className="custom-navigation fixed-top bg-body-tertiary" variant="underline" defaultActiveKey="/">
@@ -16,30 +17,33 @@ function Header() {
       </Nav.Item>
 
       {isAuthenticated
-      ? (
-        <>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/ads/create">Create ad</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/ads">My ads</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
-          </Nav.Item>
-        </>
-      )
-      : (
-        <>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/register">Register</Nav.Link>
-          </Nav.Item>
-        </>
-      )
-    }
+        ? (
+          <>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/ads/create">Create ad</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/ads/myads">My ads</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/profile/myprofile">My Profile</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/logout" >Logout</Nav.Link>
+            </Nav.Item>
+          </>
+        )
+        : (
+          <>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/register">Register</Nav.Link>
+            </Nav.Item>
+          </>
+        )
+      }
 
 
 

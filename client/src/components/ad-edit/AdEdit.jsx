@@ -1,8 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetOneAd } from '../../hooks/useAds'
+import { useGetOneAd, useUpdateAd } from '../../hooks/useAds'
 import { useForm } from '../../hooks/useForm';
-import { useMemo, useState, useEffect } from "react";
-import * as adsAPI from '../../api/ads-api'
+import { useMemo } from "react";
 
 const initialValues = {
     title: '',
@@ -14,7 +13,7 @@ const initialValues = {
 };
 
 export default function AdEdit() {
-    // const updateAd = useUpdateAd();
+    const updateAd = useUpdateAd();
     const navigate = useNavigate();
     const { adId } = useParams();
     const [ad] = useGetOneAd(adId);
@@ -24,7 +23,7 @@ export default function AdEdit() {
     
     const editAdHandler = async (values) => {
         try {
-            await adsAPI.updateAd(adId, values);;
+            await updateAd(adId, values);
             navigate(`/ads/${adId}/details`);
         } catch (err) {
             console.log(err.message);

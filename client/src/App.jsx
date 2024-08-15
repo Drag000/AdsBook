@@ -18,13 +18,12 @@ import CreateAd from './components/ad-create/AdCreate';
 import Logout from './components/logout/Logout';
 import {AuthContextProvider} from "./contexts/AuthContext";
 import PrivateGuard from './components/common/PrivateGuard';
-
-
+import MyAds from './components/my-ads/MyAds';
+import ProfileDetails from './components/profile-details/ProfileDetails';
 
 
 function App() {
-
-
+  
   return (
     <AuthContextProvider>
         <Header />
@@ -39,15 +38,16 @@ function App() {
           {/* <Route path="/profile/:profileId/delete" /> */}
 
           <Route path="/ads" element={<Ads />} />
-          
-          <Route path="/ads/:adId/details" element={<AdDetails />} />
-          
+
           {/* <Route path="/ads/:adId/delete" element={<AdDelete/>}/> */}
           <Route path="*" element={<Navigate to="/" />} />
           
           <Route element={<PrivateGuard/>}>
             <Route path="/ads/create" element={<CreateAd />} />
+            <Route path="/ads/myads" element={<MyAds />} />
+            <Route path="/ads/:adId/details" element={<AdDetails />} />
             <Route path="/ads/:adId/edit" element={<AdEdit/>}/>
+            <Route path="/profile/:profileId" element={<ProfileDetails />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
           

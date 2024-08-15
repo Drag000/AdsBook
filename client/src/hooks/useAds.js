@@ -1,5 +1,7 @@
 import * as adsAPI from '../api/ads-api'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext} from '../contexts/AuthContext';
+
 
 
 export function useGetOneAd(adId) {
@@ -19,11 +21,12 @@ export function useGetOneAd(adId) {
 
 export function useGetAllAds() {
     const [ads, setAds] = useState([]);
-
+    const { accessToken } = useContext(AuthContext);  
+    
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getAllAds();
-
+            
             setAds(result);
         })();
     }, []);

@@ -15,7 +15,7 @@ async function requester(method, url, data) {
     if (method !== 'GET') {
         options.method = method;
 
-    }
+    } 
     
     
 
@@ -28,12 +28,10 @@ async function requester(method, url, data) {
         options.body = JSON.stringify(data);
     }
 
-    
-    // console.log('method:', options.method);
-    // console.log('options:', options.headers);
+
     const response = await fetch(url, options);
-    // console.log('response:', response);
     if (response.status === 204) {
+        // localStorage.removeItem('accessToken');
         return;
     }
 
@@ -42,7 +40,7 @@ async function requester(method, url, data) {
     if (!response.ok) {
         throw result;
     }
-
+    
     return result;
 };
 
