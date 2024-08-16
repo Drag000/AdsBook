@@ -16,12 +16,26 @@ const initialValues = {
     text: '',
 };
 
+const initialAdValues = {
+    title: "",
+    creater: {
+        email: "",
+        email: ""
+    },
+    location: "",
+    condition: "",
+    description: "",
+    price: "",
+    imageURL: "",
+};
+
+
 export default function AdDetails() {
     const navigate = useNavigate();
     const { adId } = useParams();
     const { userId, isAuthenticated } = useContext(AuthContext);
-    const [ad, setAd] = useState({});
-    const [comments, refetchComments] = useGetAllComments(adId);
+    const [ad, setAd] = useState(initialAdValues);
+    const [comments, setComments,refetchComments] = useGetAllComments(adId);
     const createComment = useCreateComment();
 
     useEffect(() => {
@@ -31,8 +45,6 @@ export default function AdDetails() {
             setAd(result);
         })();
     }, [adId]);
-    
-    console.log('ADDDD', ad)
 
     const isOwner = userId === ad._ownerId;
 
@@ -40,6 +52,7 @@ export default function AdDetails() {
         try {
             await createComment(adId, text);
             refetchComments();
+           
         } catch (err) {
             console.log(err.message);
         }
@@ -71,7 +84,7 @@ export default function AdDetails() {
         <>
             <div className="card m-auto p-3 my-5 border" style={{ width: '38rem' }} >
                 <div className="row justify-content-center" >
-                    <div class="col-4">
+                    <div className="col-4">
                         <h5 className="card-title">{ad.title}</h5>
                     </div>
                 </div>
@@ -95,7 +108,7 @@ export default function AdDetails() {
                             <Col>
                                 {ad.creater.email}
                             </Col>
-                        </Row>
+                        </Row>  
                         <Row>
                             <Col xs lg="4">
                                 Phone number :

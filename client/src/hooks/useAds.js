@@ -5,7 +5,19 @@ import { AuthContext} from '../contexts/AuthContext';
 
 
 export function useGetOneAd(adId) {
-    const [ad, setAd] = useState([]);
+    const [ad, setAd] = useState({
+        title: "",
+        creater: {
+            email: "",
+            username: "",
+        },
+        location: "",
+        condition: "",
+        description: "",
+        price: "",
+        imageURL: "",
+        }
+    );
 
     useEffect(() => {
         (async () => {

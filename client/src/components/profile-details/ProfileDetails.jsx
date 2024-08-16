@@ -8,8 +8,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 
-
-
 export default function ProfileDetails() {
     const { username, email, firstName, lastName, phoneNumber, profilePicture } = useContext(AuthContext);
 
@@ -19,7 +17,7 @@ export default function ProfileDetails() {
             <Card.Img src={profilePicture} />
             <Card.Body>
                 <div className="row justify-content-center" >
-                    <div class="col-4">
+                    <div className="col-4">
                         <Card.Title>My Profile</Card.Title>
                     </div>
                 </div>

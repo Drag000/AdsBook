@@ -23,6 +23,7 @@ export const getOneAd = async (adId) => {
     const result = await request.get(`${BASE_URL}/${adId}?${params.toString()}`);
 
     const ad = result;
+    console.log('RESULT', ad)
     
     return ad;
 }

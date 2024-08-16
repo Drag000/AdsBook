@@ -1,24 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetOneAd, useUpdateAd } from '../../hooks/useAds'
 import { useForm } from '../../hooks/useForm';
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
-const initialValues = {
-    title: '',
-    condition: '',
-    location: '',
-    price: '',
-    description: '',
-    imageURL: '',
-};
+
 
 export default function AdEdit() {
     const updateAd = useUpdateAd();
     const navigate = useNavigate();
     const { adId } = useParams();
     const [ad] = useGetOneAd(adId);
-    
-    const initialFormValues = useMemo(() => Object.assign({}, initialValues, ad),[ad]);
     
     
     const editAdHandler = async (values) => {
@@ -34,7 +25,8 @@ export default function AdEdit() {
         values,
         changeHandler,
         submitHandler,
-    } = useForm(initialFormValues, editAdHandler);
+    } = useForm(ad, editAdHandler, { reinitalizeForm: true});
+    
 
     return (
         <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
