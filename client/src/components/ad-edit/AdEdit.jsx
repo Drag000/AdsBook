@@ -15,7 +15,7 @@ export default function AdEdit() {
     const editAdHandler = async (values) => {
         try {
             await updateAd(adId, values);
-            navigate(`/ads/${adId}/details`);
+            navigate(`/ads/${adId}/details/`);
         } catch (err) {
             console.log(err.message);
         }
@@ -25,7 +25,7 @@ export default function AdEdit() {
         values,
         changeHandler,
         submitHandler,
-    } = useForm(ad, editAdHandler, { reinitalizeForm: true});
+    } = useForm(ad, editAdHandler, true);
     
 
     return (
@@ -92,8 +92,8 @@ export default function AdEdit() {
                     type="url"
                     className="form-control"
                     placeholder="Please add url"
-                    name="imageURL"
-                    value={values.imageURL}
+                    name="photo"
+                    value={values.photo}
                     onChange={changeHandler}
                 />
             </div>

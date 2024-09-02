@@ -5,11 +5,15 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import { useContext } from 'react';
+import { useParams, Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext';
 
 
 export default function ProfileDetails() {
-    const { username, email, firstName, lastName, phoneNumber, profilePicture } = useContext(AuthContext);
+    const { userId, username, email, firstName, lastName, phoneNumber, profilePicture } = useContext(AuthContext);
+    const { profileId } = useParams();
+
+    const isOwner = userId == profileId;
 
 
     return (
@@ -18,7 +22,7 @@ export default function ProfileDetails() {
             <Card.Body>
                 <div className="row justify-content-center" >
                     <div className="col-4">
-                        <Card.Title>My Profile</Card.Title>
+                        <Card.Title>Profile</Card.Title>
                     </div>
                 </div>
 
@@ -65,14 +69,19 @@ export default function ProfileDetails() {
                     </Container>
                 </div>
 
-                {/* <div className="row justify-content-center" >
+                {isOwner &&
+                    <div className="row justify-content-center" >
                         <div className="col-3">
-                            <Button to={"#"} variant="info" >Edit</Button>
+                            <Button as={Link} to={`/profile/${userId}/edit`} variant="info">Edit</Button>
                         </div>
                         <div className="col-3">
-                            <Button to="#" onClick={adDeleteHandler} variant="danger" >Delete</Button>
+                            <Button as={Link} to={`/profile/${userId}/delete`} variant="danger">Delete</Button>
                         </div>
-                    </div> */}
+                        <div className="col-3">
+                            <Button as={Link} to={`/profile/${userId}/change-password`} variant="danger">Change Password</Button>
+                        </div>
+                    </div>
+                }
             </Card.Body>
         </Card>
     );

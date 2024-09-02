@@ -3,11 +3,12 @@ async function requester(method, url, data) {
     
 
     const accessToken = localStorage.getItem('accessToken');
+    // console.log(accessToken)
     
     if (accessToken) {
         options.headers = {
             ...options.headers,
-            'X-Authorization': accessToken,
+            'Authorization': `Token ${accessToken}`,
         }
     }
     
@@ -22,21 +23,23 @@ async function requester(method, url, data) {
     if (data) {
         options.headers = {
             ...options.headers,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         };
 
         options.body = JSON.stringify(data);
     }
 
-
+    // console.log('data',data)
+    // console.log('options',options)
     const response = await fetch(url, options);
+   
     if (response.status === 204) {
         // localStorage.removeItem('accessToken');
         return;
     }
 
     const result = await response.json();
-
+    // console.log('result', result)
     if (!response.ok) {
         throw result;
     }

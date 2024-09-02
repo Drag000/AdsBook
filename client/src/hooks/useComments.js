@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import commentsAPI from "../api/comments-api";
 
-export function useCreateComment() {
-    const createHandler = (adId, text) =>  commentsAPI.createComment(adId, text)
-    
-    return createHandler;
-};
+
 
 export function useGetAllComments(adId) {
     const [comments, setComments] = useState([]);
@@ -14,14 +10,39 @@ export function useGetAllComments(adId) {
     useEffect(() => {
         (async () => {
             const result = await commentsAPI.getAllComments(adId);
-                
+            console.log('COMMENTS', result);
             setComments(result);
         })();
     }, [adId, fetchTrigger]);
-    
+
     const refetchComments = () => {
+        console.log('BBBBBBBBB')
         setFetchTrigger(prev => !prev);
+        console.log('fetchTrigger', fetchTrigger)
     };
 
-    return [comments, setComments, refetchComments];
+    return [comments, refetchComments];
 }
+
+export function useCreateComment() {
+    const createHandler = async (adId, text) => {
+        const ad_id = adId
+
+
+        await commentsAPI.createComment(ad_id, text)
+
+
+    }
+    return createHandler;
+};
+
+
+
+export function useDeleteComment() {
+    const deleteHandler = async (commentId) => {
+
+        await commentsAPI.removeComment(commentId)
+
+    }
+    return deleteHandler;
+};

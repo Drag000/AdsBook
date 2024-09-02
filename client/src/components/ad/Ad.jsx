@@ -5,21 +5,22 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Ad({
-  _id,
+  id,
   title,
-  imageURL,
-  creater,
-}) 
-  
-{
+}) {
+
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <Card >
       <Container >
         <Row>
           <Col xs lg="3">
-            <Card.Img src={imageURL} />
+            {/* <Card.Img src={photo} /> */}
           </Col>
           <Col>
             <Card.Body>
@@ -27,7 +28,7 @@ export default function Ad({
                 <Container >
                   <Row>
                     <Col xs lg="3">
-                      <Button variant="info">Uploaded by: {creater.username} </Button>{' '}
+                      {/* <Button variant="info">Uploaded by: {user.username} </Button>{' '} */}
                     </Col>
                     <Col>
                       {title}
@@ -39,7 +40,10 @@ export default function Ad({
                 Some quick example text to build on the card title and make up the
                 bulk of the card's content.
               </Card.Text>
-              <Button as={Link} to={`/ads/${_id}/details`} variant="primary">Details</Button>
+              {isAuthenticated
+                ?<Button as={Link} to={`/ads/${id}/details`} variant="primary">Details</Button>
+                :<Button as={Link} to={`/login`} variant="primary">Details</Button>
+              }
             </Card.Body>
           </Col>
         </Row>

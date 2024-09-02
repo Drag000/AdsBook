@@ -1,22 +1,19 @@
 import * as adsAPI from '../api/ads-api'
 import { useState, useEffect, useContext } from "react";
-import { AuthContext} from '../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 
 export function useGetOneAd(adId) {
     const [ad, setAd] = useState({
-        title: "",
-        creater: {
-            email: "",
-            username: "",
-        },
+        id: "",
+        title: "", 
         location: "",
         condition: "",
         description: "",
         price: "",
-        imageURL: "",
-        }
+        photo: "",
+    }
     );
 
     useEffect(() => {
@@ -33,17 +30,34 @@ export function useGetOneAd(adId) {
 
 export function useGetAllAds() {
     const [ads, setAds] = useState([]);
-    const { accessToken } = useContext(AuthContext);  
-    
+    const [isFetching, setIsFetching] = useState(true);
+
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getAllAds();
-            
+
             setAds(result);
+            setIsFetching(false);
         })();
     }, []);
 
-    return [ads];
+    return [ads, isFetching];
+};
+
+export function useGetMyAds() {
+    const [ads, setAds] = useState([]);
+    const [isFetching, setIsFetching] = useState(true);
+
+    useEffect(() => {
+        (async () => {
+            const result = await adsAPI.getMyAds();
+
+            setAds(result);
+            setIsFetching(false);
+        })();
+    }, []);
+
+    return [ads, isFetching];
 };
 
 export function useCreateAd() {
@@ -58,4 +72,5 @@ export function useUpdateAd() {
 
     return adUpdateHanlder;
 }
+
 

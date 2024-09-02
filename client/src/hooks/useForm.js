@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 
-export function useForm(initialValues, submitCallback, options = {reinitalizeForm:false}) {
+export function useForm(initialValues, submitCallback, reinitalizeForm = false) {
     const [values, setValues] = useState(initialValues);
-    
+
     useEffect(() => {
-        if (options.reinitalizeForm) {
+        if (reinitalizeForm) {
             setValues(initialValues)
         }
-    }, [initialValues, options]);
-    
-    const reinitalizeForm = () => {
-        setValues(initialValues)
-    }
+    }, [initialValues, reinitalizeForm]);
 
     const changeHandler = (e) => {
         setValues(prevState => ({
@@ -24,14 +20,13 @@ export function useForm(initialValues, submitCallback, options = {reinitalizeFor
         e.preventDefault();
 
         await submitCallback(values);
-        
-        // setValues(initialValues);
+
+        setValues(initialValues);
     };
 
     return {
         values,
         changeHandler,
         submitHandler,
-        reinitalizeForm,
     };
 }

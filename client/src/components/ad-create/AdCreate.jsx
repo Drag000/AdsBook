@@ -8,7 +8,7 @@ const initialValues = {
     location: '',
     price: '',
     description: '',
-    imageURL: '',
+    photo: '',
 };
 
 export default function CreateAd() {
@@ -32,7 +32,7 @@ export default function CreateAd() {
 
     return (
         <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
-            <h3>Create Add</h3>
+            <h3 className="row justify-content-center">Create Add</h3>
             <div className="mb-3">
                 <label>Title</label>
                 <input
@@ -94,8 +94,8 @@ export default function CreateAd() {
                     type="url"
                     className="form-control"
                     placeholder="Please add url"
-                    name="imageURL"
-                    value={values.imageURL}
+                    name="photo"
+                    value={values.photo}
                     onChange={changeHandler}
                 />
             </div>

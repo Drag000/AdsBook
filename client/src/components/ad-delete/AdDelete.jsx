@@ -1,28 +1,65 @@
-// import Button from 'react-bootstrap/Button';
-// import {Modal} from 'react-bootstrap/ModalBody';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-// export default function AdDelete() {
-//     return (
+import * as adsAPI from '../../api/ads-api'
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState } from 'react';
 
-//         <div
-//             className="modal show"
-//             style={{ display: 'block', position: 'initial' }}
-//         >
-//             <Modal.Dialog>
-//                 <Modal.Header closeButton>
-//                     <Modal.Title>Modal title</Modal.Title>
-//                 </Modal.Header>
+export default function AdDelete() {
+    const navigate = useNavigate();
+    const { adId } = useParams();
+    const [error, setError] = useState('');
 
-//                 <Modal.Body>
-//                     <p>Modal body text goes here.</p>
-//                 </Modal.Body>
+    const adDeleteHandler = async () => {
 
-//                 <Modal.Footer>
-//                     <Button variant="secondary">Close</Button>
-//                     <Button variant="primary">Save changes</Button>
-//                 </Modal.Footer>
-//             </Modal.Dialog>
-//         </div>
+        try {
+            await adsAPI.removeAd(adId);
 
-//     );
-// }
+            navigate('/');
+        } catch (err) {
+            console.log(err)
+            if (err && typeof err === 'object') {
+                const errors = [];
+                
+                if (err.non_field_errors) {
+                    errors.push(err.non_field_errors.join(' '));
+                }
+
+                setError(errors);
+            } else {
+                setError('An unexpected error occurred. Please try again.');
+            }
+        }
+
+    }
+
+    const closeButtonHandler = () => navigate('/ads/myads')
+
+
+    return (
+
+        <div
+            className="modal show"
+            style={{ display: 'block', position: 'initial' }}
+        >
+            <Modal.Dialog>
+                <Modal.Body>
+                    <p>Are you sure you want to delete this ad ? </p>
+                </Modal.Body>
+                
+                <div>
+                    {error && (
+                        <p style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}> {error} </p>
+                    )}
+                </div>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeButtonHandler}>Cancel</Button>
+                    <Button variant="danger" onClick={adDeleteHandler}>Delete</Button>
+                </Modal.Footer>
+            </Modal.Dialog>
+        </div>
+
+    );
+}

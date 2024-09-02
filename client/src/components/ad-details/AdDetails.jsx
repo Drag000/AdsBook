@@ -1,84 +1,39 @@
 import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { useParams } from "react-router-dom";
-import { useForm } from '../../hooks/useForm';
 
 import * as adsAPI from '../../api/ads-api'
 import { AuthContext } from '../../contexts/AuthContext';
-import { useCreateComment, useGetAllComments } from '../../hooks/useComments';
+import AdComments from '../ad-comments/AdComments';
 
-const initialValues = {
-    text: '',
-};
 
 const initialAdValues = {
+    id: "",
     title: "",
-    creater: {
-        email: "",
-        email: ""
-    },
     location: "",
     condition: "",
     description: "",
     price: "",
-    imageURL: "",
+    photo: "",
 };
 
-
 export default function AdDetails() {
-    const navigate = useNavigate();
     const { adId } = useParams();
-    const { userId, isAuthenticated } = useContext(AuthContext);
+    const { userId, username, firstName, lastName, email, isAuthenticated } = useContext(AuthContext);
     const [ad, setAd] = useState(initialAdValues);
-    const [comments, setComments,refetchComments] = useGetAllComments(adId);
-    const createComment = useCreateComment();
 
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getOneAd(adId);
-
+            
             setAd(result);
         })();
     }, [adId]);
 
-    const isOwner = userId === ad._ownerId;
-
-    const createCommentHandler = async ({ text }) => {
-        try {
-            await createComment(adId, text);
-            refetchComments();
-           
-        } catch (err) {
-            console.log(err.message);
-        }
-    };
-
-    const {
-        values,
-        changeHandler,
-        submitHandler,
-    } = useForm(initialValues, createCommentHandler);
-
-    const adDeleteHandler = async () => {
-        const isConfirmed = confirm(`Are you sure you want to delete ${ad.title} ad?`)
-
-        if (!isConfirmed) {
-            return;
-        };
-
-        try {
-            await adsAPI.removeAd(adId);
-            navigate('/');
-        } catch (err) {
-            console.log(err.message);
-        }
-
-    }
+    const isOwner = userId === ad.user;
 
     return (
         <>
@@ -88,7 +43,7 @@ export default function AdDetails() {
                         <h5 className="card-title">{ad.title}</h5>
                     </div>
                 </div>
-                <img src={ad.imageURL} className="card-img-top" alt="..." />
+                <img src={ad.photo} className="card-img-top" alt="..." />
 
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
@@ -97,7 +52,7 @@ export default function AdDetails() {
                                 Publisher :
                             </Col>
                             <Col>
-                                {ad.creater.firstName} {ad.creater.lastName}
+                                {username} ({firstName} {lastName})
                                 
                             </Col>
                         </Row>
@@ -106,7 +61,7 @@ export default function AdDetails() {
                                 Email :
                             </Col>
                             <Col>
-                                {ad.creater.email}
+                                {email}
                             </Col>
                         </Row>  
                         <Row>
@@ -114,7 +69,7 @@ export default function AdDetails() {
                                 Phone number :
                             </Col>
                             <Col>
-                                {ad.creater.phoneNumber}
+                                {/* {ad.user.phoneNumber} */}
                             </Col>
                         </Row>
 
@@ -166,46 +121,12 @@ export default function AdDetails() {
                             <Button as={Link} to={`/ads/${adId}/edit`} variant="info" >Edit</Button>
                         </div>
                         <div className="col-3">
-                            <Button as={Link} to="#" onClick={adDeleteHandler} variant="danger" >Delete</Button>
+                            <Button as={Link} to={`/ads/${adId}/delete`} variant="danger" >Delete</Button>
                         </div>
                     </div>
                 }
             </div>
-            <div className="card m-auto p-3 my-5 border" style={{ width: '48rem' }}>
-                <div>
-                    <h3>Comments:</h3>
-                    <ul>
-                        {comments.length > 0
-                            ? comments.map(comment => (
-                                <li key={comment._id}>
-                                    {comment.author.email}: {comment.text}
-                                </li>
-                            ))
-                            : <h3>No Comments</h3>
-                        }
-                    </ul>
-                </div>
-
-                {isAuthenticated && (
-                    <form className="w-auto m-auto p-3 my-5 border" onSubmit={submitHandler}>
-                        <h5 className="w-25 m-auto">Add Comment:</h5>
-                        <div className="mb-3">
-                            <label className="w-25 m-auto">Comment</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Enter your comment.."
-                                name="text"
-                                value={values.text}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary">
-                            Create comment
-                        </button>
-                    </form>
-                )}
-            </div>
+            <AdComments/>
         </>
     );
 }

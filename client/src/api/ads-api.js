@@ -1,53 +1,83 @@
 import * as request from './requester'
 
-const BASE_URL = 'http://localhost:3030/data/ads';
+const BASE_URL = 'http://localhost:8000/ads';
+
+// function convertAdsProps(ads) {
+//     ads.map((ad) => {
+//         ad['user']['firstName'] = ad['user']['first_name'];
+//         ad['user']['lastName'] = ad['user']['last_name'];
+
+//         delete ad['user']['first_name'];
+//         delete ad['user']['last_name'];
+
+//     });
+
+// }
+
+
+// export const getDAds = async () => {
+
+//     const result = await request.get(BASE_URL);
+
+//     const ads = Object.values(result);
+//     return ads;
+// }
+
 
 export const getAllAds = async () => {
-    const params = new URLSearchParams({
-        load: `creater=_ownerId:users`,
-    });
-    
-    const result = await request.get(`${BASE_URL}?${params.toString()}`);
-    
+    const result = await request.get(BASE_URL);
+
+    const ads = Object.values(result);
+    return ads;
+}
+
+export const getMyAds = async () => {
+    const result = await request.get(`${BASE_URL}/myads/`);
+
     const ads = Object.values(result);
 
     return ads;
 }
 
+// function convertAdProps(ad) {
+//     ad['user']['firstName'] = ad['user']['first_name'];
+//     ad['user']['lastName'] = ad['user']['last_name'];
+
+//     delete ad['user']['first_name'];
+//     delete ad['user']['last_name'];
+    
+//     return ad;
+// }
 
 export const getOneAd = async (adId) => {
-    const params = new URLSearchParams({
-        load: `creater=_ownerId:users`,
-    });
 
-    const result = await request.get(`${BASE_URL}/${adId}?${params.toString()}`);
-
+    const result = await request.get(`${BASE_URL}/${adId}/details/`);
     const ad = result;
-    console.log('RESULT', ad)
-    
+
     return ad;
 }
 
 export const createAd = async (adData) => {
-    const result = await request.post(BASE_URL, adData);
+    const result = await request.post(`${BASE_URL}/create/`, adData);
 
     const ad = result;
 
     return ad;
 }
 
-export const removeAd = async (adId) => await request.del(`${BASE_URL}/${adId}`);
+export const removeAd = async (adId) => await request.del(`${BASE_URL}/${adId}/delete`);
 
-export const updateAd = async (adId, adData) => await request.put(`${BASE_URL}/${adId}`, adData);
+export const updateAd = async (adId, adData) => await request.put(`${BASE_URL}/${adId}/edit/`, adData);
 
 
 const adsAPI = {
     getAllAds,
     getOneAd,
+    getMyAds,
     createAd,
     removeAd,
     updateAd,
-    
+
 };
 
 export default adsAPI;
