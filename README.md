@@ -1,12 +1,12 @@
 
 # AdsBook
 ## Table of Contents
-* [Project Overview] [ProjectOverview]
+* [Project Overview][ProjectOverview]
 * [Features] (#Features)
 * [Tech Stack] (#Tech Stack)
 * [Architecture] (#Architecture)
 * [API Documentation] (#API Documentation)
-* [Authentication] (#authentication)
+* [Authentication](#authentication)
 * [API Documentation] (#API Documentation)
 
 [ProjectOverview] ## Project Overview
