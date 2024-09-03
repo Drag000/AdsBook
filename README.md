@@ -97,7 +97,7 @@ Authorization: Token {token}
 `GET` `/auth/logout/` including token - Loggout. Response with status 200, "Successfully logged out.".
 
 ### Ads app
-You need to send an authorized request for all endpoints below.
+*You need to send an authorized request for all endpoints below.*
 
 **Endpoints**
 
@@ -114,9 +114,9 @@ You need to send an authorized request for all endpoints below.
 `DELETE` `/ads/<int:pk>/delete/` - Delete ad. Returns an empty response with status 204.
 
 ### Common app
-**Endpoints**
+*You need to send an authorized request for all endpoints below.*
 
-You need to send an authorized request for all endpoints below.
+**Endpoints**
 
 `POST` `/common/comments/<int:ad_id>/create/` - Create comment. Response with status 201, and ad deitals.
 
