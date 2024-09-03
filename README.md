@@ -8,39 +8,58 @@
 * [Authentication](#authentication)
 * [API Documentation](#api-documentation)
 
+
 ## Project Overview
 AdsBook is a web application for users to post, browse, and manage advertisements. The project consists of a Django REST framework (DRF) backend that serves a RESTful API with token-based authentication and a React frontend that interacts with the API.
 
+
 ## Features
 User authentication and authorization with token-based authentication
+
 Create, read, update, and delete (CRUD) operations for ads
+
 Commenting on ads
+
 User profile management
+
 Responsive UI with React
+
 
 ## Tech Stack
 ###  Backend
 Django: Python web framework
+
 Django REST Framework (DRF): For building RESTful APIs
+
 PostgreSQL: Database
+
 Django REST Framework token authentication: For token-based authentication
 
 ### Frontend
 React: JavaScript library for building user interfaces
+
 JavaScript: For making HTTP requests from React to the backend API
+
 Bootstrap CSS: For UI design
+
 
 ## Architecture
 ### Backend
 Currently includes 3 main apps - accounts, ads and common
+
 accounts - Based on default User model. WIP - to be extended with more user info via additional OneToOne model, user rating, and more.
+
 ads - App for managing ads with CRUD operations. WIP - add photo management, ads categorization, search, sort and filter services 
+
 common - Currently manages only comments services. Each user can add (and delete his/her) comments under each ad.
 
 ### Frontend
 React fetches data from the backend and displays it to the user.
+
 Component oriented based on functional components.
+
 WIP - HTML / CSS, requests optimization and others.
+
 
 ## Project Structure
 ### Backend (Django)
@@ -69,12 +88,14 @@ client/
 └── package.json            # Frontend dependencies
 ```
 
+
 ## Authentication
 The application uses token-based authentication. Users need to log in to receive a token, which must be included in the Authorization header for subsequent requests.
 
 ```
 Authorization: Token {token}
 ```
+
 
 ## API Documentation
 ### Accounts app
