@@ -1,13 +1,13 @@
 
 # AdsBook
 ## Table of Contents
-* [Project Overview] (Project Overview)
-* [Features] (Features)
-* [Tech Stack] (Tech Stack)
-* [Architecture] (Architecture)
-* [API Documentation] (API Documentation)
-* [Authentication] (Authentication)
-* [API Documentation] (API Documentation)
+* [Project Overview] (#Project Overview)
+* [Features] (#Features)
+* [Tech Stack] (#Tech Stack)
+* [Architecture] (#Architecture)
+* [API Documentation] (#API Documentation)
+* [Authentication] (#Authentication)
+* [API Documentation] (#API Documentation)
 
 ## Project Overview
 AdsBook is a web application for users to post, browse, and manage advertisements. The project consists of a Django REST framework (DRF) backend that serves a RESTful API with token-based authentication and a React frontend that interacts with the API.
