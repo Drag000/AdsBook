@@ -17,12 +17,6 @@ class AdsBaseSerializer(serializers.ModelSerializer):
         model = Ads
         fields = '__all__'
 
-
-class AdsDetailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ads
-        fields = '__all__'
-
     # user = UserSerializer()
 
 

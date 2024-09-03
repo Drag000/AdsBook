@@ -124,7 +124,7 @@ export default function Register() {
                         value={values.password}
                         onChange={changeHandler}
                         className="form-control"
-                        placeholder="Enter password"
+                        placeholder="Enter your password"
                     />
                 </div>
                 <div className="mb-3">
@@ -135,7 +135,7 @@ export default function Register() {
                         value={values['confirm-password']}
                         onChange={changeHandler}
                         className="form-control"
-                        placeholder="Enter password"
+                        placeholder="Enter your password"
                     />
                 </div>
 

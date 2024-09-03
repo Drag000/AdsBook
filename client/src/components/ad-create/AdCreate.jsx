@@ -49,7 +49,7 @@ export default function CreateAd() {
                 <input
                     type="text"
                     className="form-control"
-                    placeholder=" "
+                    placeholder="Enter condition"
                     name="condition"
                     value={values.condition}
                     onChange={changeHandler}
@@ -60,7 +60,7 @@ export default function CreateAd() {
                 <input
                     type="text"
                     className="form-control"
-                    placeholder=" "
+                    placeholder="Enter location"
                     name="location"
                     value={values.location}
                     onChange={changeHandler}
@@ -71,7 +71,7 @@ export default function CreateAd() {
                 <input
                     type="number"
                     className="form-control"
-                    placeholder=" "
+                    placeholder="Enter price"
                     name="price"
                     value={values.price}
                     onChange={changeHandler}
@@ -93,7 +93,7 @@ export default function CreateAd() {
                 <input
                     type="url"
                     className="form-control"
-                    placeholder="Please add url"
+                    placeholder="Add url"
                     name="photo"
                     value={values.photo}
                     onChange={changeHandler}
@@ -103,7 +103,7 @@ export default function CreateAd() {
 
             <div className="d-grid">
                 <button type="submit" className="btn btn-primary">
-                    Create
+                    Create add
                 </button>
             </div>
         </form>

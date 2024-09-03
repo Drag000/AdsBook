@@ -96,13 +96,13 @@ Authorization: Token {token}
 
 *You need to send an authorized request for all endpoints below.*
 
-`GET` `/auth/logout/` - Loggout. Response with status 200, "Successfully logged out.".
+`POST` `/auth/logout/` - Loggout. Response with status 200, "Successfully logged out.".
 
 `GET` `/auth/<int:pk>/details/` - Get User Details. Response with status 200 and object, containing user info.
 
-`POST` `/auth/<int:pk>/edit/` - Edit User Details. Response with status 200 and object, containing user info.
+`PUT` `/auth/<int:pk>/edit/` - Edit User Details. Response with status 200 and object, containing user info.
 
-`POST` `/auth/<int:pk>/change-password/` - Change User Password. Response with status 200 and object, containing user info.
+`PUT` `/auth/<int:pk>/change-password/` - Change User Password. Response with status 200 and object, containing user info.
  
 `DELTE` `/auth/<int:pk>/delete/` - Delete User profile. Returns an empty response with status 204. Response with status 200, "Password changed successfully."
 
@@ -120,7 +120,7 @@ Authorization: Token {token}
 
 `GET` `/ads/<int:pk>/details/` - Get ad details. Response with status 200, and the ad deitals.
 
-`GET` `/ads/<int:pk>/edit/` - Edit ad. Returns response with status 200, and the updated ad deitals.
+`PUT` `/ads/<int:pk>/edit/` - Edit ad. Returns response with status 200, and the updated ad deitals.
 
 `DELETE` `/ads/<int:pk>/delete/` - Delete ad. Returns an empty response with status 204.
 

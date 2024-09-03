@@ -1,14 +1,18 @@
 import { useContext } from "react";
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import './Header.css'
 import { AuthContext } from '../../contexts/AuthContext';
 
 function Header() {
-  const { isAuthenticated, userId } = useContext(AuthContext);
+  const { isAuthenticated, userId, username } = useContext(AuthContext);
 
   return (
     <Nav className="custom-navigation fixed-top bg-body-tertiary" variant="underline" defaultActiveKey="/">
+      <Nav.Item>
+              <Nav.Link eventKey="disabled" disabled>{username}</Nav.Link>
+            </Nav.Item>
       <Nav.Item>
         <Nav.Link as={Link} to="/">Home</Nav.Link>
       </Nav.Item>

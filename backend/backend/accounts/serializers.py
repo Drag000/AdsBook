@@ -14,15 +14,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ('username', 'password', 'first_name', 'last_name', 'email')
 
-    # def create(self, validated_data):
-    #     user = UserModel.objects.create_user(**validated_data)
-    #     return user
-    #
-    # def validate_email(self, value):
-    #     if not value:
-    #         raise serializers.ValidationError("Email is required.")
-    #     return value
-
     # Remove password in registration response
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -52,7 +43,6 @@ class UserBaseSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'first_name', 'last_name']
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 
@@ -67,9 +57,6 @@ class UserSerializer(serializers.ModelSerializer):
         representation['token'] = token.key
 
         return representation
-
-
-
 
 
 class PasswordChangeSerializer(serializers.Serializer):

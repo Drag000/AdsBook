@@ -55,12 +55,8 @@ class ApiLogoutUserView(api_views.views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-
         try:
-            print(request)
-            # Get the user's token
             token = Token.objects.get(user=request.user)
-            # Delete the token to effectively log out the user
             token.delete()
             return Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
         except Token.DoesNotExist:
