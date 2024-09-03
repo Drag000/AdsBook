@@ -44,7 +44,7 @@ WIP - HTML / CSS, requests optimization and others.
 
 ## Project Structure
 ### Backend (Django)
-`
+```
 backend/
 │
 ├── accounts/               # App for auth and user management
@@ -53,10 +53,10 @@ backend/
 │   ├── comments/
 ├── settings.py             # Django settings
 └── urls.py                 # Project URL configuration
-`
+```
 
 ### Frontend (React)
-`
+```
 client/
 │
 ├── src/
@@ -67,12 +67,14 @@ client/
 │   ├── App.js              # Main application component
 │   └── index.js            # Entry point
 └── package.json            # Frontend dependencies
-`
+```
 
 ## Authentication
 The application uses token-based authentication. Users need to log in to receive a token, which must be included in the Authorization header for subsequent requests.
 
-```Authorization: Token {token}```
+```
+Authorization: Token {token}
+```
 
 ## API Documentation
 ### Accounts app
