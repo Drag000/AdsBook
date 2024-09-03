@@ -1,13 +1,13 @@
 
 # AdsBook
 ## Table of Contents
-* Project Overview
-* Features
-* Tech Stack
-* Architecture
-* Project Structure
-* Authentication
-* API Documentation
+* [Project Overview] (Project Overview)
+* [Features] (Features)
+* [Tech Stack] (Tech Stack)
+* [Architecture] (Architecture)
+* [API Documentation] (API Documentation)
+* [Authentication] (Authentication)
+* [API Documentation] (API Documentation)
 
 ## Project Overview
 AdsBook is a web application for users to post, browse, and manage advertisements. The project consists of a Django REST framework (DRF) backend that serves a RESTful API with token-based authentication and a React frontend that interacts with the API.
@@ -20,7 +20,7 @@ User profile management
 Responsive UI with React
 
 ## Tech Stack
-###Backend
+###  Backend
 Django: Python web framework
 Django REST Framework (DRF): For building RESTful APIs
 PostgreSQL: Database
@@ -78,22 +78,31 @@ The application uses token-based authentication. Users need to log in to receive
 ### Accounts app
 **Endpoints**
 `POST` `/auth/register/` with required properties username, email and password - Register. Response with status 201 with user details.
+
 `POST` `/auth/login` with required properties username and password) - Login. Response with status 200 and object, containing user info and standard string token, that can be used for requests.
+
 `GET` `/auth/logout/` including token - Loggout. Response with status 200, "Successfully logged out.".
 
 ### Ads app
 You need to send an authorized request.
 **Endpoints**
 `POST` `/ads/create/` - Create ad. Response with status 201, and ad deitals.
+
 `GET` `/ads/` - Get all ads.Response with status 200, and ads deitals.
+
 `GET` `/ads/myads/` - Get my ads - Response with status 200, and all ads deitals posted by the logged in user.
+
 `GET` `/ads/<int:pk>/details/` - Get ad details. Response with status 200, and the ad deitals.
+
 `GET` `/ads/<int:pk>/edit/` - Edit ad. Returns response with status 200, and the updated ad deitals.
+
 `DELETE` `/ads/<int:pk>/delete/` - Delete ad. Returns an empty response with status 204.
 
 ### Common app
 **Endpoints**
 `POST` `/common/comments/<int:ad_id>/create/` - Create comment. Response with status 201, and ad deitals.
+
 `GET` `/common/comments/<int:ad_id>/all/` - Get all comments for ad. Response with status 200, and ads deitals.
+
 `DELETE` `/common/comments/delete<int:pk>/` - Delete comment. Empty response with status 204.
 
