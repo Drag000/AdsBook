@@ -1,12 +1,12 @@
 
 # AdsBook
 ## Table of Contents
-* [Project Overview](#project-overview)
-* [Features](#features)
-* [Tech Stack](#tech-stack)
-* [Architecture](#architecture)
-* [Authentication](#authentication)
-* [API Documentation](#api-documentation)
+ [Project Overview](#project-overview)
+ [Features](#features)
+ [Tech Stack](#tech-stack)
+ [Architecture](#architecture)
+ [Authentication](#authentication)
+ [API Documentation](#api-documentation)
 
 
 ## Project Overview
@@ -14,44 +14,33 @@ AdsBook is a web application for users to post, browse, and manage advertisement
 
 
 ## Features
-User authentication and authorization with token-based authentication
-
-Create, read, update, and delete (CRUD) operations for ads
-
-Commenting on ads
-
-User profile management
-
-Responsive UI with React
+* User authentication and authorization with token-based authentication
+* Create, read, update, and delete (CRUD) operations for ads
+* Commenting on ads
+* User profile management
+* Responsive UI with React
 
 
 ## Tech Stack
 ###  Backend
-Django: Python web framework
-
-Django REST Framework (DRF): For building RESTful APIs
-
-PostgreSQL: Database
-
-Django REST Framework token authentication: For token-based authentication
+* Django: Python web framework
+* Django REST Framework (DRF): For building RESTful APIs
+* PostgreSQL: Database
+* Django REST Framework token authentication: For token-based authentication
 
 ### Frontend
-React: JavaScript library for building user interfaces
-
-JavaScript: For making HTTP requests from React to the backend API
-
-Bootstrap CSS: For UI design
+* React: JavaScript library for building user interfaces
+* JavaScript: For making HTTP requests from React to the backend API
+* Bootstrap CSS: For UI design
 
 
 ## Architecture
 ### Backend
 Currently includes 3 main apps - accounts, ads and common
 
-accounts - Based on default User model. WIP - to be extended with more user info via additional OneToOne model, user rating, and more.
-
-ads - App for managing ads with CRUD operations. WIP - add photo management, ads categorization, search, sort and filter services 
-
-common - Currently manages only comments services. Each user can add (and delete his/her) comments under each ad.
+* accounts - Based on default User model. WIP - to be extended with more user info via additional OneToOne model, user rating, and more.
+* ads - App for managing ads with CRUD operations. WIP - add photo management, ads categorization, search, sort and filter services 
+* common - Currently manages only comments services. Each user can add (and delete his/her) comments under each ad.
 
 ### Frontend
 React fetches data from the backend and displays it to the user.
