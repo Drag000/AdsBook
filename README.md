@@ -1,7 +1,7 @@
 
 # AdsBook
 ## Table of Contents
-* [Project Overview] (#Project Overview)
+* [Project Overview] [ProjectOverview]
 * [Features] (#Features)
 * [Tech Stack] (#Tech Stack)
 * [Architecture] (#Architecture)
@@ -9,7 +9,7 @@
 * [Authentication] (#Authentication)
 * [API Documentation] (#API Documentation)
 
-## Project Overview
+[ProjectOverview] ## Project Overview
 AdsBook is a web application for users to post, browse, and manage advertisements. The project consists of a Django REST framework (DRF) backend that serves a RESTful API with token-based authentication and a React frontend that interacts with the API.
 
 ## Features
@@ -45,7 +45,7 @@ WIP - HTML / CSS, requests optimization and others.
 
 ## Project Structure
 ### Backend (Django)
-```
+`
 backend/
 │
 ├── accounts/               # App for auth and user management
@@ -54,10 +54,10 @@ backend/
 │   ├── comments/
 ├── settings.py             # Django settings
 └── urls.py                 # Project URL configuration
-```
+`
 
 ### Frontend (React)
-```
+`
 client/
 │
 ├── src/
@@ -68,15 +68,17 @@ client/
 │   ├── App.js              # Main application component
 │   └── index.js            # Entry point
 └── package.json            # Frontend dependencies
-```
+`
 
 ## Authentication
 The application uses token-based authentication. Users need to log in to receive a token, which must be included in the Authorization header for subsequent requests.
-`Authorization: Token {token}`
+
+```Authorization: Token {token}```
 
 ## API Documentation
 ### Accounts app
 **Endpoints**
+
 `POST` `/auth/register/` with required properties username, email and password - Register. Response with status 201 with user details.
 
 `POST` `/auth/login` with required properties username and password) - Login. Response with status 200 and object, containing user info and standard string token, that can be used for requests.
@@ -86,6 +88,7 @@ The application uses token-based authentication. Users need to log in to receive
 ### Ads app
 You need to send an authorized request.
 **Endpoints**
+
 `POST` `/ads/create/` - Create ad. Response with status 201, and ad deitals.
 
 `GET` `/ads/` - Get all ads.Response with status 200, and ads deitals.
@@ -100,6 +103,7 @@ You need to send an authorized request.
 
 ### Common app
 **Endpoints**
+
 `POST` `/common/comments/<int:ad_id>/create/` - Create comment. Response with status 201, and ad deitals.
 
 `GET` `/common/comments/<int:ad_id>/all/` - Get all comments for ad. Response with status 200, and ads deitals.
