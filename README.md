@@ -1,12 +1,12 @@
 
 # AdsBook
 ## Table of Contents
- [Project Overview](#project-overview)
- [Features](#features)
- [Tech Stack](#tech-stack)
- [Architecture](#architecture)
- [Authentication](#authentication)
- [API Documentation](#api-documentation)
+ * [Project Overview](#project-overview)
+ * [Features](#features)
+ * [Tech Stack](#tech-stack)
+ * [Architecture](#architecture)
+ * [Authentication](#authentication)
+ * [API Documentation](#api-documentation)
 
 
 ## Project Overview
@@ -97,7 +97,8 @@ Authorization: Token {token}
 `GET` `/auth/logout/` including token - Loggout. Response with status 200, "Successfully logged out.".
 
 ### Ads app
-You need to send an authorized request.
+You need to send an authorized request for all endpoints below.
+
 **Endpoints**
 
 `POST` `/ads/create/` - Create ad. Response with status 201, and ad deitals.
@@ -114,6 +115,8 @@ You need to send an authorized request.
 
 ### Common app
 **Endpoints**
+
+You need to send an authorized request for all endpoints below.
 
 `POST` `/common/comments/<int:ad_id>/create/` - Create comment. Response with status 201, and ad deitals.
 
