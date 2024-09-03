@@ -8,7 +8,15 @@ import Row from 'react-bootstrap/Row';
 import * as adsAPI from '../../api/ads-api'
 import { AuthContext } from '../../contexts/AuthContext';
 import AdComments from '../ad-comments/AdComments';
+import { useGetProfileDetails } from '../../hooks/useAuth'
 
+const initialPublisherValues = {
+    id: "",
+    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+};
 
 const initialAdValues = {
     id: "",
@@ -21,17 +29,27 @@ const initialAdValues = {
 };
 
 export default function AdDetails() {
+
     const { adId } = useParams();
-    const { userId, username, firstName, lastName, email, isAuthenticated } = useContext(AuthContext);
+    const { userId } = useContext(AuthContext);
     const [ad, setAd] = useState(initialAdValues);
+    const [publisher, setPublisher] = useState(initialPublisherValues);
+    const getProfileDetails = useGetProfileDetails()
+    
 
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getOneAd(adId);
-            
+ 
+            const result2 = await getProfileDetails(result.user)
             setAd(result);
+            setPublisher(result2);
         })();
     }, [adId]);
+    
+    
+    console.log('publisher', publisher)
+    console.log('ad2', ad)
 
     const isOwner = userId === ad.user;
 
@@ -52,8 +70,8 @@ export default function AdDetails() {
                                 Publisher :
                             </Col>
                             <Col>
-                                {username} ({firstName} {lastName})
-                                
+                                {publisher.username} ({publisher.firstName} {publisher.lastName})
+
                             </Col>
                         </Row>
                         <Row>
@@ -61,9 +79,9 @@ export default function AdDetails() {
                                 Email :
                             </Col>
                             <Col>
-                                {email}
+                                {publisher.email}
                             </Col>
-                        </Row>  
+                        </Row>
                         <Row>
                             <Col xs lg="4">
                                 Phone number :
@@ -126,7 +144,7 @@ export default function AdDetails() {
                     </div>
                 }
             </div>
-            <AdComments/>
+            <AdComments />
         </>
     );
 }

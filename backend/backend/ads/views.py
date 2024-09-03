@@ -1,7 +1,7 @@
 from rest_framework import generics as api_views, permissions
 
 from backend.ads.models import Ads
-from backend.ads.serializers import AdsBaseSerializer, AdsCreateSerializer
+from backend.ads.serializers import AdsBaseSerializer, AdsCreateSerializer, AdsDetailsSerializer
 
 
 class AdsApiListView(api_views.ListAPIView):
@@ -30,4 +30,4 @@ class AdsApiCreateView(api_views.ListCreateAPIView):
 class AdApiDetailsEditDeleteView(api_views.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = Ads.objects.all()
-    serializer_class = AdsBaseSerializer
+    serializer_class = AdsDetailsSerializer

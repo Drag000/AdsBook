@@ -46,6 +46,13 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         return user
 
 
+class UserBaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 
@@ -61,11 +68,6 @@ class UserSerializer(serializers.ModelSerializer):
 
         return representation
 
-
-class UserDeleteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserModel
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
 
 
 

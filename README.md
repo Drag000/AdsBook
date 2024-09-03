@@ -94,7 +94,18 @@ Authorization: Token {token}
 
 `POST` `/auth/login` with required properties username and password) - Login. Response with status 200 and object, containing user info and standard string token, that can be used for requests.
 
-`GET` `/auth/logout/` including token - Loggout. Response with status 200, "Successfully logged out.".
+*You need to send an authorized request for all endpoints below.*
+
+`GET` `/auth/logout/` - Loggout. Response with status 200, "Successfully logged out.".
+
+`GET` `/auth/<int:pk>/details/` - Get User Details. Response with status 200 and object, containing user info.
+
+`POST` `/auth/<int:pk>/edit/` - Edit User Details. Response with status 200 and object, containing user info.
+
+`POST` `/auth/<int:pk>/change-password/` - Change User Password. Response with status 200 and object, containing user info.
+ 
+`DELTE` `/auth/<int:pk>/delete/` - Delete User profile. Returns an empty response with status 204. Response with status 200, "Password changed successfully."
+
 
 ### Ads app
 *You need to send an authorized request for all endpoints below.*

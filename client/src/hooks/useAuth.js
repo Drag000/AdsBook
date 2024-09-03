@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { register, login, logout, updateProfile, updatePassword } from "../api/auth-api"
+import { register, login, logout, updateProfile, updatePassword, getProfileDetails } from "../api/auth-api"
 import { AuthContext } from '../contexts/AuthContext';
 
 
@@ -63,6 +63,24 @@ export const useUpdateProfile = () => {
     };
 
     return profileUpdateHanlder;
+}
+
+export const useGetProfileDetails = () => {
+    const getProfileDetailsHanlder = async (userId) => {
+        // const profileDataJS = profileData;
+
+        // const { firstName, lastName, ...rest } = profileDataJS;
+        // const profileDataPython = { user_id: userId, first_name: firstName, last_name: lastName, ...rest };
+
+        const resultPython = await getProfileDetails(userId);
+        
+        const { id, first_name, last_name, ...rest3 } = resultPython;
+        const resultJS = { userId: id, firstName: first_name, lastName: last_name, ...rest3 };
+
+        return resultJS;
+    };
+
+    return getProfileDetailsHanlder;
 }
 
 

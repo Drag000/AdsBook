@@ -32,3 +32,6 @@ export const updateProfile = async (userId, profileData) => {
 export const updatePassword = async (userId, passwordsData) => await request.put(`${BASE_URL}/${userId}/change-password/`, passwordsData);
 
 export const deleteProfile = async (userId) => await request.del(`${BASE_URL}/${userId}/delete/`);
+
+
+export const getProfileDetails = async (userId) => await request.get(`${BASE_URL}/${userId}/details/`);

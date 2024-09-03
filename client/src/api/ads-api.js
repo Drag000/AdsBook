@@ -2,27 +2,6 @@ import * as request from './requester'
 
 const BASE_URL = 'http://localhost:8000/ads';
 
-// function convertAdsProps(ads) {
-//     ads.map((ad) => {
-//         ad['user']['firstName'] = ad['user']['first_name'];
-//         ad['user']['lastName'] = ad['user']['last_name'];
-
-//         delete ad['user']['first_name'];
-//         delete ad['user']['last_name'];
-
-//     });
-
-// }
-
-
-// export const getDAds = async () => {
-
-//     const result = await request.get(BASE_URL);
-
-//     const ads = Object.values(result);
-//     return ads;
-// }
-
 
 export const getAllAds = async () => {
     const result = await request.get(BASE_URL);
@@ -39,15 +18,6 @@ export const getMyAds = async () => {
     return ads;
 }
 
-// function convertAdProps(ad) {
-//     ad['user']['firstName'] = ad['user']['first_name'];
-//     ad['user']['lastName'] = ad['user']['last_name'];
-
-//     delete ad['user']['first_name'];
-//     delete ad['user']['last_name'];
-    
-//     return ad;
-// }
 
 export const getOneAd = async (adId) => {
 
@@ -81,3 +51,37 @@ const adsAPI = {
 };
 
 export default adsAPI;
+
+
+
+// function convertAdsProps(ads) {
+//     ads.map((ad) => {
+//         ad['user']['firstName'] = ad['user']['first_name'];
+//         ad['user']['lastName'] = ad['user']['last_name'];
+
+//         delete ad['user']['first_name'];
+//         delete ad['user']['last_name'];
+
+//     });
+
+// }
+
+
+// export const getDAds = async () => {
+
+//     const result = await request.get(BASE_URL);
+
+//     const ads = Object.values(result);
+//     return ads;
+// }
+
+
+// function convertAdProps(ad) {
+//     ad['user']['firstName'] = ad['user']['first_name'];
+//     ad['user']['lastName'] = ad['user']['last_name'];
+
+//     delete ad['user']['first_name'];
+//     delete ad['user']['last_name'];
+    
+//     return ad;
+// }

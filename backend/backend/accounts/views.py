@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import generics as api_views, serializers, status, permissions
 
 from backend.accounts.serializers import RegisterUserSerializer, UserSerializer, PasswordChangeSerializer, \
-    UserDeleteSerializer
+    UserBaseSerializer
 from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
@@ -39,10 +39,16 @@ class ApiEditUserProfileView(api_views.UpdateAPIView):
     serializer_class = UserSerializer
 
 
+class ApiDetailsUserProfileView(api_views.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = UserModel.objects.all()
+    serializer_class = UserBaseSerializer
+
+
 class ApiDeleteUserProfileView(api_views.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = UserModel.objects.all()
-    serializer_class = UserDeleteSerializer
+    serializer_class = UserBaseSerializer
 
 
 class ApiLogoutUserView(api_views.views.APIView):
