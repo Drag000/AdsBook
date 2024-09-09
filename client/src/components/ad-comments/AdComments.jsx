@@ -48,47 +48,49 @@ export default function AdComments() {
     };
 
     return (
-        <div className="card m-auto p-3 my-5 border" style={{ width: '48rem' }}>
-            <div>
-                <h4 className="row justify-content-center">Comments:</h4>
-                <ul style={{ listStyleType: 'none' }}>
-                    {comments.length > 0
-                        ? comments.map(comment => (
-                            <li key={comment.id}>
-                                {comment.username}: {comment.text}
+        <>
+            <h5 className="row justify-content-center">Comments:</h5>
+            <div className="card mx-auto mb-3 p-2 border" style={{ width: '48rem' }}>
+                <div>
+                    <ul style={{ listStyleType: 'none' }}>
+                        {comments.length > 0
+                            ? comments.map(comment => (
+                                <li key={comment.id}>
+                                    {comment.username}: {comment.text}
 
-                                {(userId === comment.user) &&
-                                    <CloseButton onClick={() => deleteCommentHandler(comment.id)} />
-                                }
-                            </li>
-                        ))
-                        : <span className="row justify-content-center" style={{fontStyle: 'italic'}}>No comments..</span>
-                    }
-                </ul>
+                                    {(userId === comment.user) &&
+                                        <CloseButton onClick={() => deleteCommentHandler(comment.id)} />
+                                    }
+                                </li>
+                            ))
+                            : <span className="row justify-content-center" style={{ fontStyle: 'italic' }}>No comments..</span>
+                        }
+                    </ul>
+                </div>
+
+                {isAuthenticated && (
+                    <form className="pb-0 my-5 mb-0 mt-1" onSubmit={submitHandler}>
+                        <div className="mb-3">
+                            <Row>
+                                <Col xs={9}>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter your comment.."
+                                        name="text"
+                                        value={values.text}
+                                        onChange={changeHandler}
+                                    />
+                                </Col>
+                                <Col>
+                                    <button type="submit" className="btn btn-primary"> Add comment </button>
+                                </Col>
+                            </Row>
+                        </div>
+
+                    </form>
+                )}
             </div>
-
-            {isAuthenticated && (
-                <form className="pb-0 my-5 mb-0 mt-1" onSubmit={submitHandler}>
-                    <div className="mb-3">
-                        <Row>
-                            <Col xs={9}>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter your comment.."
-                                    name="text"
-                                    value={values.text}
-                                    onChange={changeHandler}
-                                />
-                            </Col>
-                            <Col>
-                                <button type="submit" className="btn btn-primary"> Add comment </button>
-                            </Col>
-                        </Row>
-                    </div>
-
-                </form>
-            )}
-        </div>
+        </>
     );
 }

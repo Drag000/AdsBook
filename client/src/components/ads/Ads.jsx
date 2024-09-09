@@ -11,7 +11,7 @@ export default function Ads({ limit }) {
     const displayedAds = limit ? ads.slice(0, limit) : ads;
 
     return (
-        <Container className="p-2 my-5 border">
+        <Container className="p-2 my-5">
             <div className="row justify-content-center">
                 {isFetching
                     ? <SpinnerComp />

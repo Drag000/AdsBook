@@ -6,13 +6,13 @@ import { AuthContext } from '../contexts/AuthContext';
 
 export function useGetOneAd(adId) {
     const [ad, setAd] = useState({
-        id: "",
-        title: "", 
-        location: "",
-        condition: "",
-        description: "",
-        price: "",
-        photo: "",
+        title: '',
+        condition: '',
+        location: '',
+        price: '',
+        description: '',
+        main_photo: null,
+        photos: null,
     }
     );
 

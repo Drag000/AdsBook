@@ -50,48 +50,43 @@ export default function Login() {
 
 
     return (
-        <div>
-            
-            <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
-                <h3 className="w-25 m-auto">Log in</h3>
-                
-                <div className="mb-3">
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={values.username}
-                        onChange={changeHandler}
-                        className="form-control"
-                        placeholder="Enter username"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={values.password}
-                        onChange={changeHandler}
-                        className="form-control"
-                        placeholder="Enter password"
-                    />
-                </div>
+        <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
+            <h3 className="w-25 m-auto">Log in</h3>
 
-                <div>
-                    {error && (
-                        <p style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}> {error} </p>
-                    )}
-                </div>
+            <div className="mb-3">
+                <label>Username</label>
+                <input
+                    type="text"
+                    name="username"
+                    value={values.username}
+                    onChange={changeHandler}
+                    className="form-control"
+                    placeholder="Enter username"
+                />
+            </div>
+            <div className="mb-3">
+                <label>Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    value={values.password}
+                    onChange={changeHandler}
+                    className="form-control"
+                    placeholder="Enter password"
+                />
+            </div>
 
-                <div className="d-grid">
-                    <button type="submit" className="btn btn-primary">
-                        Log in
-                    </button>
-                </div>
-            </form>
-        </div>
+            <div style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>
+                {error && error.map((err, index) => (
+                    <p key={index}>{err}</p>
+                ))}
+            </div>
 
-
+            <div className="d-grid">
+                <button type="submit" className="btn btn-primary">
+                    Log in
+                </button>
+            </div>
+        </form>
     );
 }

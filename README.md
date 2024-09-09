@@ -31,7 +31,7 @@ AdsBook is a web application for users to post, browse, and manage advertisement
 ### Frontend
 * React: JavaScript library for building user interfaces
 * JavaScript: For making HTTP requests from React to the backend API
-* Bootstrap CSS: For UI design
+* (WIP) Bootstrap CSS: For UI design
 
 
 ## Architecture
@@ -47,7 +47,7 @@ React fetches data from the backend and displays it to the user.
 
 Component oriented based on functional components.
 
-WIP - HTML / CSS, requests optimization and others.
+WIP - HTML / CSS bootstrap implementation for all pages, requests optimization, forms and validations improvements (react-hook-form to be installed) and others.
 
 
 ## Project Structure
@@ -59,8 +59,11 @@ backend/
 ├── ads/                    # App for ads management
 ├── common/                 # App for comments management and others
 │   ├── comments/
+├── __init__.py
+├── asgi.py
 ├── settings.py             # Django settings
-└── urls.py                 # Project URL configuration
+├── urls.py                 # Project URL configuration
+└── wsgi.py
 ```
 
 ### Frontend (React)
@@ -73,8 +76,13 @@ client/
 │   ├── contexts/           # Auth context management
 │   ├── hooks/              # App hooks
 │   ├── App.js              # Main application component
-│   └── index.js            # Entry point
-└── package.json            # Frontend dependencies
+│   └── main.jsx
+├── eslintrc.cjs
+├── .gitignore             
+├── index.js                
+├── package-lock.json       
+├── package.json            # Frontend dependencies
+└── vite.config.js          # Vite config
 ```
 
 

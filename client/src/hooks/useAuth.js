@@ -4,9 +4,8 @@ import { AuthContext } from '../contexts/AuthContext';
 
 
 
-
 export const useLogin = () => {
-    const { changeAuthState, loginAuthManager } = useContext(AuthContext);
+    const { loginAuthManager } = useContext(AuthContext);
 
     const loginHandler = async (username, password) => {
         const resultPython = await login(username, password);
@@ -15,7 +14,6 @@ export const useLogin = () => {
         let resultJS = { userId: user_id, firstName: first_name, lastName: last_name, ...rest };
 
         loginAuthManager(resultJS);
-        // console.log('LOGIN RESULT', resultJS)
         return resultJS;
     }
 
@@ -24,20 +22,22 @@ export const useLogin = () => {
 
 
 export const useRegister = () => {
-
-    const registerHandler = async (email, password, firstName, lastName, username) => {
-
-        const result = await register(email, password, firstName, lastName, username);
-        // changeAuthState(result);
-
+    const registerHandler = async (userData) => {
+        // email, password, firstName, lastName, username
+        
+        const { firstName, lastName, ...rest } = userData;
+        const userDataPython = { first_name: firstName, last_name: lastName, ...rest };
+        
+        const result = await register(userDataPython);
         return result;
     }
 
     return registerHandler;
 };
 
+
 export const useLogout = () => {
-    const { onLogoutComplete, accessToken } = useContext(AuthContext);
+    const { onLogoutComplete } = useContext(AuthContext);
 
     const logoutHandler = async () => {
         await logout();
@@ -46,6 +46,7 @@ export const useLogout = () => {
 
     return logoutHandler;
 };
+
 
 export const useUpdateProfile = () => {
     const profileUpdateHanlder = async (userId, profileData) => {
@@ -65,12 +66,9 @@ export const useUpdateProfile = () => {
     return profileUpdateHanlder;
 }
 
+
 export const useGetProfileDetails = () => {
     const getProfileDetailsHanlder = async (userId) => {
-        // const profileDataJS = profileData;
-
-        // const { firstName, lastName, ...rest } = profileDataJS;
-        // const profileDataPython = { user_id: userId, first_name: firstName, last_name: lastName, ...rest };
 
         const resultPython = await getProfileDetails(userId);
         

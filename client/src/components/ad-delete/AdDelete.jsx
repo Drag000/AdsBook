@@ -21,7 +21,7 @@ export default function AdDelete() {
             console.log(err)
             if (err && typeof err === 'object') {
                 const errors = [];
-                
+
                 if (err.non_field_errors) {
                     errors.push(err.non_field_errors.join(' '));
                 }
@@ -47,11 +47,11 @@ export default function AdDelete() {
                 <Modal.Body>
                     <p>Are you sure you want to delete this ad ? </p>
                 </Modal.Body>
-                
-                <div>
-                    {error && (
-                        <p style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}> {error} </p>
-                    )}
+
+                <div style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>
+                    {error && error.map((err, index) => (
+                        <p key={index}>{err}</p>
+                    ))}
                 </div>
 
                 <Modal.Footer>

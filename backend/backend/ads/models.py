@@ -44,7 +44,28 @@ class Ads(models.Model):
         blank=True,
     )
 
-    photo = models.URLField(
+    main_photo = models.ImageField(
+        upload_to='ads_main_photos/',
         null=True,
         blank=True,
+    )
+
+
+class AdsPhotos(models.Model):
+    ad = models.ForeignKey(
+        Ads,
+        on_delete=models.CASCADE,
+        related_name='photos',
+    )
+
+    photos = models.ImageField(
+        upload_to='ads_photos/',
+        null=True,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        null=False,
+        blank=False,
     )

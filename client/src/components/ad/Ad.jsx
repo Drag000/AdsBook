@@ -1,26 +1,33 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
+import { Button, Col, Container, Row, Card, Image } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Ad({
   id,
   title,
+  main_photo,
+  price,
+  location,
 }) {
 
   const { isAuthenticated } = useContext(AuthContext);
 
   return (
-    <Card >
+    <Card className='mb-3'>
       <Container >
         <Row>
-          <Col xs lg="3">
-            {/* <Card.Img src={photo} /> */}
+          <Col xs={6} md={4}>
+            <Image src={main_photo} rounded alt="photo"
+              style={{
+                width: '100%',
+                maxWidth: '300px',
+                maxHeight: '233px',
+                objectFit: 'cover',
+                borderRadius: '10px'
+              }}
+            />
           </Col>
           <Col>
             <Card.Body>
@@ -36,13 +43,24 @@ export default function Ad({
                   </Row>
                 </Container>
               </Card.Title>
+
+              <div>
+                <p>
+                  <strong>Price:</strong> {price}
+                </p>
+                <p>
+                  <strong>Location:</strong> {location}
+                </p>
+              </div>
+
               <Card.Text>
                 Some quick example text to build on the card title and make up the
                 bulk of the card's content.
               </Card.Text>
+
               {isAuthenticated
-                ?<Button as={Link} to={`/ads/${id}/details`} variant="primary">Details</Button>
-                :<Button as={Link} to={`/login`} variant="primary">Details</Button>
+                ? <Button as={Link} to={`/ads/${id}/details`} variant="primary">Details</Button>
+                : <Button as={Link} to={`/login`} variant="primary">Details</Button>
               }
             </Card.Body>
           </Col>

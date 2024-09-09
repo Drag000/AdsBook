@@ -3,38 +3,49 @@ async function requester(method, url, data) {
     
 
     const accessToken = localStorage.getItem('accessToken');
-    // console.log(accessToken)
-    
     if (accessToken) {
         options.headers = {
             ...options.headers,
             'Authorization': `Token ${accessToken}`,
         }
     }
-    
+
 
     if (method !== 'GET') {
         options.method = method;
 
     } 
     
-    
+    console.log('data', data)
 
     if (data) {
-        options.headers = {
-            ...options.headers,
-            "Content-Type": "application/json",
-        };
-
-        options.body = JSON.stringify(data);
+        if (data instanceof FormData) {
+            // If it's FormData, don't set Content-Type; the browser will set it automatically
+            options.body = data;
+        } else {
+            options.headers = {
+                ...options.headers,
+                "Content-Type": "application/json",
+            };
+            options.body = JSON.stringify(data);
+        }
     }
+    
+    // if (data.photo && data.photo !== "") {
+    //     options.headers = {
+    //         ...options.headers,
+    //         "Content-Type": "multipart/form-data",
+    //     };
 
-    // console.log('data',data)
-    // console.log('options',options)
+    //     options.body = JSON.stringify(data);
+    // }
+    
+
+    console.log('data',data)
+    console.log('options',options)
     const response = await fetch(url, options);
    
     if (response.status === 204) {
-        // localStorage.removeItem('accessToken');
         return;
     }
 

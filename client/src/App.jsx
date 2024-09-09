@@ -21,7 +21,7 @@ import ProfileDetails from './components/profile-details/ProfileDetails';
 import ProfileEdit from './components/profile-edit/ProfileEdit'
 import PasswordUpdate from './components/password-update/PasswordUpdate';
 import ProfileDelete from './components/profile-delete/ProfileDelete';
-
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
 

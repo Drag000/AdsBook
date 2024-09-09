@@ -28,8 +28,15 @@ export const getOneAd = async (adId) => {
 }
 
 export const createAd = async (adData) => {
-    const result = await request.post(`${BASE_URL}/create/`, adData);
+    
+    // const { mainPhoto, ...rest } = adData;
+    // const adDataPython = { main_photo: mainPhoto, ...rest };
 
+    const result = await request.post(`${BASE_URL}/create/`, adData);
+    
+    // const { main_photo, ...rest2 } = result;
+    // const resultJS = { mainPhoto: main_photo, ...rest2 };
+    // console.log('resultJS', resultJS)
     const ad = result;
 
     return ad;
