@@ -25,7 +25,7 @@ export default function ProfileDelete() {
 
     return (
         <div
-            className="modal show"
+            className="modal show my-5"
             style={{ display: 'block', position: 'initial' }}
         >
             <Modal.Dialog>

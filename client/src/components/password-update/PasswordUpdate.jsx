@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { useUpdatePassword } from '../../hooks/useAuth'
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 export default function PasswordUpdate() {
     const updatePassword = useUpdatePassword();
@@ -54,44 +55,57 @@ export default function PasswordUpdate() {
         values,
         changeHandler,
         submitHandler,
+        validated,
     } = useForm(initialValues, editPasswordHandler);
 
     return (
-        <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
-            <div className="mb-3">
-                <label>Old Password*</label>
-                <input
+        <Form className="w-25 m-auto p-3 my-5 border" noValidate onSubmit={submitHandler} validated={validated}>
+        
+            <Form.Group className="mb-3">
+                <Form.Label>Old Password*</Form.Label>
+                <Form.Control
                     type="password"
                     name="oldPassword"
                     value={values.oldPassword}
                     onChange={changeHandler}
-                    className="form-control"
                     placeholder="Enter your old password"
+                    required
                 />
-            </div>
-            <div className="mb-3">
-                <label>New Password*</label>
-                <input
+                <Form.Control.Feedback type="invalid">
+                    Please enter your old password.
+                </Form.Control.Feedback>
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+                <Form.Label>New Password* (at lest 8 characters)</Form.Label>
+                <Form.Control
                     type="password"
                     name="newPassword"
                     value={values.newPassword}
                     onChange={changeHandler}
-                    className="form-control"
                     placeholder="Enter your new password"
+                    required
                 />
-            </div>
-            <div className="mb-3">
-                <label>Confirm Password*</label>
-                <input
+                <Form.Control.Feedback type="invalid">
+                    Please enter your new password.
+                </Form.Control.Feedback>
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+                <Form.Label>Confirm Password* (at lest 8 characters)</Form.Label>
+                <Form.Control
                     type="password"
                     name="confirmNewPassword"
                     value={values.confirmNewPassword}
                     onChange={changeHandler}
-                    className="form-control"
                     placeholder="Enter your new password"
+                    required
                 // ['confirm-password']
                 />
-            </div>
+                <Form.Control.Feedback type="invalid">
+                    Please enter your new password.
+                </Form.Control.Feedback>
+            </Form.Group>
 
             <div style={{ fontSize: '13px' }}>* Required</div>
 
@@ -102,10 +116,10 @@ export default function PasswordUpdate() {
             </div>
 
             <div className="d-grid">
-                <button type="submit" className="btn btn-primary" >
+                <Button type="submit" className="btn btn-primary" >
                     Update
-                </button>
+                </Button>
             </div>
-        </form>
+        </Form>
     );
 }

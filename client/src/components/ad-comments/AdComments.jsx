@@ -5,8 +5,7 @@ import { useForm } from '../../hooks/useForm';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useCreateComment, useGetAllComments, useDeleteComment } from '../../hooks/useComments';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { Button, Col, Row, Form } from 'react-bootstrap';
 
 
 const initialCommentsValues = {
@@ -23,7 +22,6 @@ export default function AdComments() {
     const createCommentHandler = async ({ text }) => {
         try {
             await createComment(adId, text);
-            console.log('CCCCCcc')
             await refetchComments();
 
         } catch (err) {
@@ -69,26 +67,27 @@ export default function AdComments() {
                 </div>
 
                 {isAuthenticated && (
-                    <form className="pb-0 my-5 mb-0 mt-1" onSubmit={submitHandler}>
-                        <div className="mb-3">
+                    <Form className="pb-0 my-5 mb-0 mt-1" onSubmit={submitHandler}>
+                        <Form.Group className="mb-3">
                             <Row>
                                 <Col xs={9}>
-                                    <input
+                                    <Form.Control
                                         type="text"
                                         className="form-control"
                                         placeholder="Enter your comment.."
                                         name="text"
                                         value={values.text}
                                         onChange={changeHandler}
+                                        required
                                     />
                                 </Col>
                                 <Col>
-                                    <button type="submit" className="btn btn-primary"> Add comment </button>
+                                    <Button type="submit" className="btn btn-primary"> Add comment </Button>
                                 </Col>
                             </Row>
-                        </div>
+                        </Form.Group>
 
-                    </form>
+                    </Form>
                 )}
             </div>
         </>

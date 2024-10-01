@@ -1,9 +1,9 @@
-
 import { useLogin } from '../../hooks/useAuth';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useContext, useState } from 'react';
+import { Button, Col, Row, Form } from 'react-bootstrap';
 
 const initialValues = { username: '', password: '' };
 
@@ -44,37 +44,45 @@ export default function Login() {
         values,
         changeHandler,
         submitHandler,
+        validated,
     } = useForm(initialValues, loginHandler);
 
 
-
+    
 
     return (
-        <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
+        <Form className="w-25 m-auto p-3 my-5 border" noValidate onSubmit={submitHandler} validated={validated}>
             <h3 className="w-25 m-auto">Log in</h3>
 
-            <div className="mb-3">
-                <label>Username</label>
-                <input
+            <Form.Group className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
                     type="text"
                     name="username"
                     value={values.username}
                     onChange={changeHandler}
-                    className="form-control"
                     placeholder="Enter username"
+                    required
                 />
-            </div>
-            <div className="mb-3">
-                <label>Password</label>
-                <input
+                <Form.Control.Feedback type="invalid">
+                    Please enter your username.
+                </Form.Control.Feedback>
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
                     type="password"
                     name="password"
                     value={values.password}
                     onChange={changeHandler}
-                    className="form-control"
                     placeholder="Enter password"
+                    required
                 />
-            </div>
+                <Form.Control.Feedback type="invalid">
+                    Please enter your password.
+                </Form.Control.Feedback>
+            </Form.Group>
 
             <div style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>
                 {error && error.map((err, index) => (
@@ -83,10 +91,10 @@ export default function Login() {
             </div>
 
             <div className="d-grid">
-                <button type="submit" className="btn btn-primary">
+                <Button type="submit" className="btn btn-primary">
                     Log in
-                </button>
+                </Button>
             </div>
-        </form>
+        </Form>
     );
 }

@@ -28,14 +28,12 @@ export default function AdDetails() {
     }, [adId]);
 
 
-    console.log('ad', ad)
-
     const isOwner = userId === ad.user;
 
 
     return (
-        <>
-            <Container className="border mt-4 mb-5">
+        <div className="my-5">
+            <Container className="border mt-4 mb-5 p-2">
                 <Container className="mb-4">
                     <Row>
                         <Col xs={6} md={4}>
@@ -143,7 +141,7 @@ export default function AdDetails() {
             )}
 
             <AdComments />
-        </>
+        </div>
     );
 
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useForm(initialValues, submitCallback, reinitalizeForm = false) {
     const [values, setValues] = useState(initialValues);
-    // const [isValid, setIsValid] = useState(true);
+    const [validated, setValidated] = useState(false);
 
     useEffect(() => {
         if (reinitalizeForm) {
@@ -15,29 +15,31 @@ export function useForm(initialValues, submitCallback, reinitalizeForm = false) 
             ...prevState,
             [e.target.name]: e.target.value,
         }));
-        
-    
-        
+
+
+
     };
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        // const form = e.currentTarget;
-        // if (form.checkValidity() === false) {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // }
-
-        // setValidated(true);
-
-    await submitCallback(values);
-
-    setValues(initialValues);
-};
-
-return {
-    values,
-    changeHandler,
-    submitHandler,
-};
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        } else {
+            await submitCallback(values);
+            setValues(initialValues);
+            
+        }
+        
+        setValidated(true);
+        
+    };
+ 
+    return {
+        values,
+        changeHandler,
+        submitHandler,
+        validated,
+    };
 }

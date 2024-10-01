@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useContext, useState } from 'react';
 import { useUpdatePassword, useUpdateProfile } from '../../hooks/useAuth'
 import { useNavigate } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 
 export default function ProfileEdit() {
@@ -57,57 +58,69 @@ export default function ProfileEdit() {
         values,
         changeHandler,
         submitHandler,
+        validated,
     } = useForm(currentValues, editProfileHandler);
 
 
     return (
-        <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
+        <Form className="w-25 m-auto p-3 my-5 border" noValidate onSubmit={submitHandler} validated={validated}>
             <h3 className="w-25 m-auto">Profile</h3>
-            <div className="mb-3">
-                <label>Username*</label>
-                <input
+            
+            <Form.Group className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
                     type="text"
                     name="username"
                     value={values.username}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="Username"
+                    placeholder="Enter username.."
+                    required
+                    disabled
+                    readOnly
                 />
-            </div>
+                <Form.Control.Feedback type="invalid">
+                    Please enter your username.
+                </Form.Control.Feedback>
+            </Form.Group>
 
-            <div className="mb-3">
-                <label>Email*</label>
-                <input
+
+            <Form.Group className="mb-3">
+                <Form.Label>Email*</Form.Label>
+                <Form.Control
                     type="email"
                     name="email"
                     value={values.email}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="example@gmail.com"
+                    placeholder="Enter your email 'example@gmail.com'.."
+                    required
                 />
-            </div>
-            <div className="mb-3">
-                <label>First name</label>
-                <input
+                <Form.Control.Feedback type="invalid">
+                    Please enter your email.
+                </Form.Control.Feedback>
+            </Form.Group>
+            
+            <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
                     type="text"
                     name="firstName"
                     value={values.firstName}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="First name"
+                    placeholder="Enter your First Name.."
                 />
-            </div>
-            <div className="mb-3">
-                <label>Last name</label>
-                <input
+            </Form.Group>
+
+
+            <Form.Group className="mb-3">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
                     type="text"
                     name="lastName"
                     value={values.lastName}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="First name"
+                    placeholder="Enter your Last Name.."
                 />
-            </div>
+            </Form.Group>
 
             {/* <div className="mb-3">
             <label>Phone</label>
@@ -131,10 +144,10 @@ export default function ProfileEdit() {
             </div>
 
             <div className="d-grid">
-                <button type="submit" className="btn btn-primary" >
+                <Button type="submit" className="btn btn-primary" >
                     Update
-                </button>
+                </Button>
             </div>
-        </form>
+        </Form>
     );
 }

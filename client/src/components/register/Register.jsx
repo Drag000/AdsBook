@@ -2,7 +2,7 @@ import { useRegister } from '../../hooks/useAuth';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { useState, useEffect } from 'react';
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 const initialValues = { email: '', password: '', firstName: '', lastName: '', username: '', 'confirm-password': '' };
@@ -55,79 +55,66 @@ export default function Register() {
         values,
         changeHandler,
         submitHandler,
+        validated,
     } = useForm(initialValues, registerHandler);
 
 
     return (
-        <Form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
+        <Form className="w-25 m-auto p-3 my-5 border" noValidate onSubmit={submitHandler} validated={validated}>
             <h3 className="w-25 m-auto">Sign Up</h3>
 
-            <div className="mb-3">
-                <label>Username*</label>
-                <input
-                    type="text"
-                    name="username"
-                    value={values.username}
-                    onChange={changeHandler}
-                    className="form-control"
-                    placeholder="Enter your 'username'"
-                />
-            </div>
-
-            {/* <Form.Group controlId="username">
+            <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                     type="text"
                     name="username"
                     value={values.username}
                     onChange={changeHandler}
-                    // pattern="^[a-zA-Z0-9]+$"
+                    placeholder="Enter username.."
                     required
-                    isInvalid={
-                        validated &&
-                        !/^[a-zA-Z0-9]+$/.test(values.username)
-                    }
-                    className={isValid ? 'is-valid' : 'is-invalid'}
                 />
                 <Form.Control.Feedback type="invalid">
-                    Please enter a valid username.
+                    Please enter your username.
                 </Form.Control.Feedback>
-            </Form.Group> */}
+            </Form.Group>
 
-            <div className="mb-3">
-                <label>Email*</label>
-                <input
+            <Form.Group className="mb-3">
+                <Form.Label>Email*</Form.Label>
+                <Form.Control
                     type="email"
                     name="email"
                     value={values.email}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="example@gmail.com"
+                    placeholder="Enter your email 'example@gmail.com'.."
+                    required
                 />
-            </div>
+                <Form.Control.Feedback type="invalid">
+                    Please enter your email.
+                </Form.Control.Feedback>
+            </Form.Group>
 
-            <div className="mb-3">
-                <label>First name </label>
-                <input
+            <Form.Group className="mb-3">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
                     type="text"
                     name="firstName"
                     value={values.firstName}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="Enter your 'First name'"
+                    placeholder="Enter your First Name.."
                 />
-            </div>
-            <div className="mb-3">
-                <label>Last name</label>
-                <input
+            </Form.Group>
+
+
+            <Form.Group className="mb-3">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
                     type="text"
                     name="lastName"
                     value={values.lastName}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="Enter your 'Last name'"
+                    placeholder="Enter your Last Name.."
                 />
-            </div>
+            </Form.Group>
 
             {/* <div className="mb-3">
                     <label>Phone</label>
@@ -140,32 +127,40 @@ export default function Register() {
                         placeholder="Please enter your phone number '+359XXXXXXXXX'"
                     />
                 </div> */}
-            <div className="mb-3">
-                <label>Password* (at lest 8 characters)</label>
-                <input
+
+            <Form.Group className="mb-3">
+                <Form.Label>Password* (at lest 8 characters)</Form.Label>
+                <Form.Control
                     type="password"
                     name="password"
                     value={values.password}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="Enter your password"
+                    placeholder="Enter your password.."
+                    required
                 />
-            </div>
-            <div className="mb-3">
-                <label>Confirm Password*</label>
-                <input
+                <Form.Control.Feedback type="invalid">
+                    Please enter your password.
+                </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label>Confirm Password*</Form.Label>
+                <Form.Control
                     type="password"
                     name="confirm-password"
                     value={values['confirm-password']}
                     onChange={changeHandler}
-                    className="form-control"
-                    placeholder="Enter your password"
+                    placeholder="Enter your password.."
+                    required
                 />
-            </div>
+                <Form.Control.Feedback type="invalid">
+                    Please confirm your password.
+                </Form.Control.Feedback>
+            </Form.Group>
 
             <div style={{ fontSize: '13px' }}>* Required</div>
             <br />
-            
+
             <div style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>
                 {error && error.map((err, index) => (
                     <p key={index}>{err}</p>
@@ -173,9 +168,9 @@ export default function Register() {
             </div>
 
             <div className="d-grid">
-                <button type="submit" className="btn btn-primary" >
+                <Button type="submit" className="btn btn-primary" >
                     Sign Up
-                </button>
+                </Button>
             </div>
         </Form>
     );
