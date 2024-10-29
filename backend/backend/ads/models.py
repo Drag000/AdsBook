@@ -9,6 +9,11 @@ class Ads(models.Model):
     MAX_TITLE_CONDITION = 20
     MAX_TITLE_LOCATION = 30
 
+    CONDITION_CHOICES = (
+        ('New', 'New'),
+        ('Used', 'Used')
+    )
+
     user = models.ForeignKey(
         UserModel,
         on_delete=models.DO_NOTHING,
@@ -22,6 +27,7 @@ class Ads(models.Model):
 
     condition = models.CharField(
         max_length=MAX_TITLE_CONDITION,
+        choices=CONDITION_CHOICES,
         null=False,
         blank=False,
     )
