@@ -35,6 +35,7 @@ jobs:
       DB_PASSWORD: "postgres"
       DB_HOST: "localhost"
       DB_PORT: "5432"
+      SECRET_KEY: "my-secret-key"
 
     steps:
     - name: Check out code
