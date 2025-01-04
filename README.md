@@ -5,6 +5,8 @@
  * [Features](#features)
  * [Tech Stack](#tech-stack)
  * [Architecture](#architecture)
+ * [Project Structure](#project-structure)
+ * [Getting Started](#getting-started)
  * [Authentication](#authentication)
  * [API Documentation](#api-documentation)
 
@@ -18,7 +20,7 @@ AdsBook is a web application for users to post, browse, and manage advertisement
 * Create, read, update, and delete (CRUD) operations for ads
 * Commenting on ads
 * User profile management
-* Responsive UI with React
+* Responsive UI with React (WIP)
 
 
 ## Tech Stack
@@ -31,7 +33,7 @@ AdsBook is a web application for users to post, browse, and manage advertisement
 ### Frontend
 * React: JavaScript library for building user interfaces
 * JavaScript: For making HTTP requests from React to the backend API
-* (WIP) Bootstrap CSS: For UI design
+* Bootstrap CSS: For UI design (WIP)
 
 
 ## Architecture
@@ -47,23 +49,42 @@ React fetches data from the backend and displays it to the user.
 
 Component oriented based on functional components.
 
-WIP - HTML / CSS bootstrap implementation for all pages, requests optimization, forms and validations improvements (react-hook-form to be installed) and others.
+HTML / CSS bootstrap implementation for all pages, requests optimization, forms and validations improvements (react-hook-form to be installed) and others (WIP).
 
 
 ## Project Structure
+```
+adsbook/
+│
+├── backend/                    # backend
+├── client/                     # frontend
+└── docker-compose.yml
+```
+
 ### Backend (Django)
 ```
 backend/
 │
-├── accounts/               # App for auth and user management
-├── ads/                    # App for ads management
-├── common/                 # App for comments management and others
-│   ├── comments/
-├── __init__.py
-├── asgi.py
-├── settings.py             # Django settings
-├── urls.py                 # Project URL configuration
-└── wsgi.py
+├── backend/
+│   │
+│   ├── accounts/               # App for auth and user management
+│   ├── ads/                    # App for ads management
+│   ├── common/                 # App for comments management and others
+│   │   ├── comments/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py             # Django settings
+│   ├── urls.py                 # Project URL configuration
+│   └── wsgi.py
+├── env/                        
+│   ├── .env.test               # Configuration file for the main Django settings as environments
+├── tests/                      # Tests
+├── .dockergnore
+├── .gitignore
+├── Dockerfile                  # Dockerfile for building backend image
+├── entrypoint.sh               # Script for running migrations and starting Django development server in Dockerfile
+├── manage.py
+└── requirements.txt
 ```
 
 ### Frontend (React)
@@ -77,14 +98,46 @@ client/
 │   ├── hooks/              # App hooks
 │   ├── App.js              # Main application component
 │   └── main.jsx
+├── .dockergnore
 ├── eslintrc.cjs
-├── .gitignore             
+├── .gitignore      
+├── Dockerfile              # Dockerfile for building frontend image
 ├── index.js                
 ├── package-lock.json       
 ├── package.json            # Frontend dependencies
 └── vite.config.js          # Vite config
 ```
 
+
+## Getting Started
+### Installation
+Clone the repository
+```
+git clone https://github.com/Drag000/AdsBook
+```
+
+### Backend Setup
+There is testing configuration file (env.test) for the main Django settings as environments in backend/env/. Defauld settings are for testing purposes, hence you can update them if you need.
+
+### Docker Setup
+The application can be run by Docker using the docker-compose file in the main folder. Moreover there are 2 Dockerfiles for building images- 1 for frontend image in client folder and 1 for backend image in backend folder.
+
+1. Navigate to the main directory:
+```
+cd adsbook
+```
+
+2. Build frontend and backend images:
+```
+docker-compose build
+```
+
+3. Starts the containers and test the application:
+```
+docker-compose up -d
+```
+
+Frontend starts on http://localhost:5173/ and backend starts on http://localhost:8000/
 
 ## Authentication
 The application uses token-based authentication. Users need to log in to receive a token, which must be included in the Authorization header for subsequent requests.
