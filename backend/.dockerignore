@@ -1,0 +1,40 @@
+# Ignore Python cache and temporary files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.sqlite3
+
+# Ignore virtual environment
+env/
+venv/
+
+# Ignore test-related files and folders
+tests/
+*.pytest_cache
+.coverage
+htmlcov/
+
+# Ignore Django static files (if collected during build)
+# static/
+
+# Ignore media files (if uploaded by users, handled outside Docker)
+mediafiles/
+
+# Ignore editor/IDE settings
+*.vscode/
+*.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS and miscellaneous files
+.DS_Store
+Thumbs.db
+*.log
+
+# Ignore git-related files
+.git
+.gitignore
+
+# Ignore Docker ignore file itself
+.dockerignore

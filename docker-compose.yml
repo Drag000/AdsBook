@@ -1,0 +1,46 @@
+services:
+    postgres:
+        image: postgres:14
+        container_name: test_db_container
+        environment:
+            - POSTGRES_DB=test_db
+            - POSTGRES_USER=test_user
+            - POSTGRES_PASSWORD=test_password
+        volumes:
+            - test_db_data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        networks:
+            - adsbooknetwork
+        
+    adsbookfrontend:
+        build:
+          context: ./client
+          dockerfile: Dockerfile
+        container_name: adsbookfc
+        ports:
+            - 5173:5173
+        networks:
+            - adsbooknetwork
+      
+    adsbookbackend:
+        depends_on:
+            - postgres
+        build:
+          context: ./backend
+          dockerfile: Dockerfile
+        container_name: adsbookbc
+        ports:
+            - 8000:8000
+        env_file:
+            - ./backend/env/env.test
+        networks:
+            - adsbooknetwork
+        
+networks:
+    adsbooknetwork:
+        name: adsbooknetwork
+        
+volumes:
+    test_db_data:
+        name: test_db_data
