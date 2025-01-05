@@ -117,8 +117,8 @@ export default function AdEdit() {
                     required
                 >
                     <option value="">Select condition</option>
-                    <option value="new">New</option>
-                    <option value="used">Used</option>
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                     Please select a condition.
@@ -197,9 +197,9 @@ export default function AdEdit() {
                 </div>
             </Form.Group>
 
-             {/* Input to upload new photos */}
+            {/* Input to upload new photos */}
             <Form.Group className="mb-3">
-                <Form.Label>Add New Photos</Form.Label>
+                <Form.Label>Add New Photos</Form.Label>    
                 <Form.Control
                     type="file"
                     name="photos"
@@ -207,6 +207,9 @@ export default function AdEdit() {
                     accept="image/jpeg,image/png,image/gif"
                     multiple
                 />
+                <Form.Text className="text-muted">
+                    Add multiple photos by holding "Ctrl" and selecting the photos.
+                </Form.Text>
             </Form.Group>
 
             <div style={{ fontSize: '13px' }}>* Required</div>
@@ -218,123 +221,5 @@ export default function AdEdit() {
             </div>
 
         </Form>
-
-        // <form className="w-25 m-auto p-3 my-5 border" onSubmit={submitHandler}>
-        //     <h3>Edit Add</h3>
-
-        //     <div className="mb-3">
-        //         <label>Title</label>
-        //         <input
-        //             type="text"
-        //             className="form-control"
-        //             placeholder="Enter title"
-        //             name="title"
-        //             value={values.title}
-        //             onChange={changeHandler}
-        //         />
-        //     </div>
-
-        //     <div className="mb-3">
-        //         <label>Condition</label>
-        //         <input
-        //             type="text"
-        //             className="form-control"
-        //             placeholder=" "
-        //             name="condition"
-        //             value={values.condition}
-        //             onChange={changeHandler}
-        //         />
-        //     </div>
-
-        //     <div className="mb-3">
-        //         <label>Location</label>
-        //         <input
-        //             type="text"
-        //             className="form-control"
-        //             placeholder=" "
-        //             name="location"
-        //             value={values.location}
-        //             onChange={changeHandler}
-        //         />
-        //     </div>
-
-        //     <div className="mb-3">
-        //         <label>Price</label>
-        //         <input
-        //             type="number"
-        //             className="form-control"
-        //             placeholder=" "
-        //             name="price"
-        //             value={values.price}
-        //             onChange={changeHandler}
-        //         />
-        //     </div>
-
-        //     <div className="mb-3">
-        //         <label>Description</label>
-        //         <textarea
-        //             type="textarea"
-        //             className="form-control"
-        //             placeholder="Please describe.."
-        //             name="description"
-        //             value={values.description}
-        //             onChange={changeHandler}
-        //         />
-        //     </div>
-
-        //     <div className="mb-3">
-        //         <label htmlFor="formFile" className="form-label">Main photo</label>
-        //         <input
-        //             id="formFile"
-        //             type="file"
-        //             className="form-control"
-        //             placeholder=" "
-        //             name="main_photo"
-        //             onChange={changeHandler}
-        //             accept="image/jpeg,image/png,image/gif"
-        //         />
-        //     </div>
-
-        //     {/* Display existing photos with delete buttons */}
-        //     <div className="mb-3">
-        //         <label>Current Photos</label>
-        //         <div className="d-flex flex-wrap">
-        //             {photos.map((photo) => (
-        //                 <Col key={photo.pk} xs={6} md={4} className="position-relative">
-        //                     <Image src={photo.photo_url} rounded alt={`Photo ${photo.pk}`} className="img-thumbnail" />
-        //                     <Button
-        //                         variant="danger"
-        //                         size="sm"
-        //                         className="position-absolute top-0 end-0"
-        //                         onClick={() => deletePhotoHandler(photo)}
-        //                     >
-        //                         X
-        //                     </Button>
-        //                 </Col>
-        //             ))}
-        //         </div>
-        //     </div>
-
-        //     {/* Input to upload new photos */}
-        //     <div className="mb-3">
-        //         <label htmlFor="formFileMultiple" className="form-label">Add New Photos</label>
-        //         <input
-        //             id="formFileMultiple"
-        //             type="file"
-        //             className="form-control"
-        //             name="photos"
-        //             onChange={changeHandler}
-        //             accept="image/jpeg,image/png,image/gif"
-        //             multiple
-        //         />
-        //     </div>
-
-
-        //     <div className="d-grid">
-        //         <button type="submit" className="btn btn-primary">
-        //             Update
-        //         </button>
-        //     </div>
-        // </form>
     );
 }

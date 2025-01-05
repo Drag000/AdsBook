@@ -49,7 +49,9 @@ class AdsCreateSerializer(serializers.ModelSerializer):
         fields = ['title', 'location', 'price', 'description', 'condition', 'main_photo', 'photos']
 
     def create(self, validated_data):
-        photos_data = self.context['request'].data.getlist('photos')
+        # photos_data = self.context['request'].data.getlist('photos')
+        request = self.context['request']
+        photos_data = request.FILES.getlist('photos')
         ad = Ads.objects.create(**validated_data)
         if photos_data:
             for photo in photos_data:

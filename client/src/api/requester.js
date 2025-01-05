@@ -13,7 +13,6 @@ async function requester(method, url, data) {
 
     if (method !== 'GET') {
         options.method = method;
-
     } 
     
     console.log('data', data)

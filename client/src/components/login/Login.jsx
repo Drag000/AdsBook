@@ -48,7 +48,6 @@ export default function Login() {
     } = useForm(initialValues, loginHandler);
 
 
-    
 
     return (
         <Form className="w-25 m-auto p-3 my-5 border" noValidate onSubmit={submitHandler} validated={validated}>
@@ -84,11 +83,13 @@ export default function Login() {
                 </Form.Control.Feedback>
             </Form.Group>
 
-            <div style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>
-                {error && error.map((err, index) => (
-                    <p key={index}>{err}</p>
-                ))}
-            </div>
+            {error && (
+                <div style={{ color: "red", textAlign: "center", fontWeight: "bold" }}>
+                    {error.map((err, index) => (
+                        <p key={index}>{err}</p>
+                    ))}
+                </div>
+            )}
 
             <div className="d-grid">
                 <Button type="submit" className="btn btn-primary">

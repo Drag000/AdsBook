@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useCreateAd } from "../../hooks/useAds";
 import { useState } from 'react';
 
-import { Button, Col, Image, Form } from 'react-bootstrap';
+import { Button, Col, Form } from 'react-bootstrap';
 
 const initialValues = {
     title: '',
@@ -20,7 +20,9 @@ export default function CreateAd() {
 
     const [values, setValues] = useState(initialValues);
     const [newPhotos, setNewPhotos] = useState([]);
+    const [error, setError] = useState('');
     const [validated, setValidated] = useState(false);
+    const [priceIsValid, setPriceIsValid] = useState(true);
 
     const changeHandler = (e) => {
         const { name, value, files } = e.target;
@@ -32,6 +34,10 @@ export default function CreateAd() {
                 setValues({ ...values, [name]: files[0] });
             }
         } else {
+            if (name === 'price') {
+                const price = parseFloat(value);
+                setPriceIsValid(price >= 0);
+            }
             setValues({ ...values, [name]: value });
         }
     };
@@ -60,12 +66,42 @@ export default function CreateAd() {
                 });
             }
 
-
             try {
                 await createAd(formData);
                 navigate('/');
             } catch (err) {
-                console.log(err.message);
+                if (err && typeof err === 'object') {
+                    const errors = [];
+
+                    if (err.title) {
+                        errors.push(`Title: ${err.title.join(' ')}`);
+                    }
+                    if (err.condition) {
+                        errors.push(`Condition: ${err.condition.join(' ')}`);
+                    }
+                    if (err.location) {
+                        errors.push(`Location: ${err.location.join(' ')}`);
+                    }
+                    if (err.price) {
+                        errors.push(`Price: ${err.price.join(' ')}`);
+                    }
+                    if (err.description) {
+                        errors.push(`Description: ${err.description.join(' ')}`);
+                    }
+                    if (err.main_photo) {
+                        errors.push(`Main Photo: ${err.main_photo.join(' ')}`);
+                    }
+
+
+                    if (err.non_field_errors) {
+                        errors.push(err.non_field_errors.join(' '));
+                    }
+
+                    setError(errors);
+                    console.log('error', error)
+                } else {
+                    setError('An unexpected error occurred. Please try again.');
+                }
             }
         }
         setValidated(true);
@@ -73,33 +109,13 @@ export default function CreateAd() {
     };
 
     return (
-        // <form className="w-25 m-auto p-3 my-5 border needs-validation" onSubmit={submitHandler} noValidate>
-        // <form className="w-25 m-auto p-3 my-5 border" validated={validated} onSubmit={submitHandler} noValidate>
-        //     <h3 className="row justify-content-center">Create Add</h3>
-
-        //     <div className="mb-3">
-        //         <label className="form-label">Title*</label>
-        //         <input
-        //             type="text"
-        //             className="form-control"
-        //             placeholder="Enter title"
-        //             name="title"
-        //             value={values.title}
-        //             onChange={changeHandler}
-        //             required
-
-        //         />
-        //         <div className="invalid-feedback">Please provide a title.</div>
-        //     </div>
-
         <Form className="w-25 m-auto p-3 my-5 border" noValidate validated={validated} onSubmit={submitHandler} >
             <h3 className="row justify-content-center">Create Add</h3>
 
             <Form.Group className="mb-3">
-                <Form.Label>Title*</Form.Label>
+                <Form.Label>Title* </Form.Label>
                 <Form.Control
                     type="text"
-
                     placeholder="Enter title"
                     name="title"
                     value={values.title}
@@ -120,8 +136,8 @@ export default function CreateAd() {
                     required
                 >
                     <option value="">Select condition</option>
-                    <option value="new">New</option>
-                    <option value="used">Used</option>
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                     Please select a condition.
@@ -151,7 +167,8 @@ export default function CreateAd() {
                     name="price"
                     value={values.price}
                     onChange={changeHandler}
-                    required
+                    isInvalid={!priceIsValid}
+                    // required
                 />
                 <Form.Control.Feedback type="invalid">
                     Please provide a price.
@@ -189,98 +206,24 @@ export default function CreateAd() {
                     accept="image/jpeg,image/png,image/gif"
                     multiple
                 />
+                <Form.Text className="text-muted">
+                    Add multiple photos by holding "Ctrl" and selecting the photos.
+                </Form.Text>
             </Form.Group>
 
             <div style={{ fontSize: '13px' }}>* Required</div>
+
+            <div style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>
+                {error && error.map((err, index) => (
+                    <p key={index}>{err}</p>
+                ))}
+            </div>
 
             <div className="d-grid gap-2">
                 <Button type="submit" variant="primary" className="mt-3">
                     Create Ad
                 </Button>
             </div>
-
-            {/* <div className="mb-3">
-                <label>Condition</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter condition"
-                    name="condition"
-                    value={values.condition}
-                    onChange={changeHandler}
-                    required
-                />
-                <div className="invalid-feedback">Please provide a title.</div>
-            </div>
-
-            <div className="mb-3">
-                <label>Location*</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter location"
-                    name="location"
-                    value={values.location}
-                    onChange={changeHandler}
-                />
-            </div>
-            <div className="mb-3">
-                <label>Price*</label>
-                <input
-                    type="number"
-                    className="form-control"
-                    placeholder="Enter price"
-                    name="price"
-                    value={values.price}
-                    onChange={changeHandler}
-                />
-            </div>
-            <div className="mb-3">
-                <label>Description</label>
-                <textarea
-                    type="textarea"
-                    className="form-control"
-                    placeholder="Please describe.."
-                    name="description"
-                    value={values.description}
-                    onChange={changeHandler}
-                />
-            </div>
-
-            <div className="mb-3">
-                <label htmlFor="formFile" className="form-label">Main photo</label>
-                <input
-                    id="formFile"
-                    type="file"
-                    className="form-control"
-                    placeholder=" "
-                    name="main_photo"
-                    onChange={changeHandler}
-                    accept="image/jpeg,image/png,image/gif"
-                />
-            </div>
-
-            <div className="mb-3">
-                <label htmlFor="formFileMultiple" className="form-label">Photos</label>
-                <input
-                    id="formFileMultiple"
-                    type="file"
-                    className="form-control"
-                    placeholder=" "
-                    name="photos"
-                    onChange={changeHandler}
-                    accept="image/jpeg,image/png,image/gif"
-                    multiple
-                />
-            </div>
-
-            <div style={{ fontSize: '13px' }}>* Required</div>
-            <br />
-            <div className="d-grid">
-                <button type="submit" className="btn btn-primary">
-                    Create add
-                </button>
-            </div> */}
         </Form>
     );
 }
