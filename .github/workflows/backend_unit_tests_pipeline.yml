@@ -36,6 +36,9 @@ jobs:
       DB_HOST: "localhost"
       DB_PORT: "5432"
       SECRET_KEY: "my-secret-key"
+      DEBUG: "TRUE"
+      ALLOWED_HOSTS: "localhost 127.0.0.1"
+      CORS_ALLOWED_ORIGINS: "http://localhost:5173"
 
     steps:
     - name: Check out code
