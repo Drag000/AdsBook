@@ -8,15 +8,23 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Check out code
       uses: actions/checkout@v3
 
     - name: Set up Docker Compose
-      run: |
-        docker-compose -f docker-compose.yml up --build -d
+      run: docker-compose -f docker-compose.yml up --build -d
+      
+    - name: Test container access
+      run: docker exec adsbookbc echo "Container is running"
+
+    - name: Debug backend container
+      run: docker exec adsbookbc ls -la /app
+
+    - name: List installed Python packages
+      run: docker exec adsbookbc pip freeze
 
     - name: Wait for Postgres
       run: |
@@ -25,12 +33,12 @@ jobs:
           sleep 1
         done
 
-    - name: Run migrations and tests
-      run: |
-        docker exec adsbookbc python manage.py migrate
-        docker exec adsbookbc python manage.py test
+    - name: Run migrations
+      run: docker exec adsbookbc python manage.py migrate
+  
+    - name: Run tests
+      run: docker exec adsbookbc python manage.py test
 
     - name: Tear down Docker Compose
       if: always()
-      run: |
-        docker-compose -f docker-compose.yml down --volumes --remove-orphans
+      run: docker-compose -f docker-compose.yml down --volumes --remove-orphans
