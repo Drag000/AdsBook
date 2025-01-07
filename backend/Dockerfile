@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     gcc \
+    dos2unix \
     netcat-openbsd \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -23,6 +24,7 @@ COPY . .
 
 # Ensure entrypoint.sh has execution permissions
 RUN chmod +x /app/entrypoint.sh
+RUN dos2unix /app/entrypoint.sh
 
 EXPOSE 8000
 
