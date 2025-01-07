@@ -34,7 +34,7 @@ jobs:
 
     - name: Wait for Postgres
       run: |
-        until docker exec adsbookbc pg_isready -h postgres -p 5432 -U test_user; do
+        until docker exec test_db_container pg_isready -U test_user; do
           echo "Waiting for postgres..."
           sleep 1
         done
