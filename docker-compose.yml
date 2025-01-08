@@ -33,7 +33,7 @@ services:
         ports:
             - 8000:8000
         env_file:
-            - ./backend/env/env.test
+            - ./backend/env/.env.test
         networks:
             - adsbooknetwork
         
