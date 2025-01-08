@@ -5,9 +5,11 @@
 __pycache__/
 *.sqlite3
 
+
 # Ignore virtual environment
-env/
 venv/
+.env
+.env.prod
 
 # Ignore test-related files and folders
 tests/
