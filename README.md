@@ -13,6 +13,10 @@
 
 ## Project Overview
 AdsBook is a web application for users to post, browse, and manage advertisements. The project consists of a Django REST framework (DRF) backend that serves a RESTful API with token-based authentication and a React frontend that interacts with the API.
+The focus is not on the UX (as of now), but rather than functionality, dockerization and using terraform for deployment in Azure.
+The app is dockerized. You can clone and start it on your machine via docker-compose.
+There is terraform code for testing purposes to deploy it in Azire as containerized apps and postgresql database. As of now the apps starts development servers instead of production-ready environments.
+Link to Azure - https://adsbook-frontend.victoriousflower-6076ba40.northeurope.azurecontainerapps.io/
 
 
 ## Features
@@ -122,6 +126,7 @@ There is testing configuration file (env.test) for the main Django settings as e
 ### Docker Setup
 The application can be run by Docker using the docker-compose file in the main folder. Moreover there are 2 Dockerfiles for building images- 1 for frontend image in client folder and 1 for backend image in backend folder.
 
+Steps:
 1. Navigate to the main directory:
 ```
 cd adsbook
@@ -138,6 +143,34 @@ docker-compose up -d
 ```
 
 Frontend starts on http://localhost:5173/ and backend starts on http://localhost:8000/
+
+### Terraform Setup
+Currently this Terraform configuration is intended only for testing purposes to deponstrate the usage of Terraform to deploy containerized apps in Azure cloud.**As of now the apps starts development servers instead of production-ready environments.** Django app (python manage.py runserver 0.0.0.0:8000) and the React aapp (npm run dev -- --host)
+(WIP) To set up production environment instead of development servers.
+
+Steps:
+1. After cloning the repo you must update the settings for the backend host. Go to client/src/api/config-api.js and comment out line 6 `export const BASE_URL = 'http://localhost:8000'` and uncomment line 3 `export const BASE_URL = import.meta.env.VITE_BACKEND_URL;`
+```
+cd adsbook
+```
+
+2. Build frontend and backend images:
+```
+docker-compose build
+```
+
+3. Update you Azure subsription id. Go go terraform/values.tfvar and update 'subscription_id'
+
+4. Execute terraform commands:
+```
+terraform validate
+```
+```
+terraform plan -var-file="values.tfvars"
+```
+```
+terraform apply -var-file="values.tfvars"
+```
 
 ## Authentication
 The application uses token-based authentication. Users need to log in to receive a token, which must be included in the Authorization header for subsequent requests.

@@ -1,17 +1,17 @@
 import * as request from './requester'
+import { BASE_URL} from './config-api'
 
-const BASE_URL = 'http://localhost:8000/ads';
-
+const ADS_BASE_URL = `${BASE_URL}/ads`;
 
 export const getAllAds = async () => {
-    const result = await request.get(BASE_URL);
+    const result = await request.get(ADS_BASE_URL);
 
     const ads = Object.values(result);
     return ads;
 }
 
 export const getMyAds = async () => {
-    const result = await request.get(`${BASE_URL}/myads/`);
+    const result = await request.get(`${ADS_BASE_URL}/myads/`);
 
     const ads = Object.values(result);
 
@@ -21,7 +21,7 @@ export const getMyAds = async () => {
 
 export const getOneAd = async (adId) => {
 
-    const result = await request.get(`${BASE_URL}/${adId}/details/`);
+    const result = await request.get(`${ADS_BASE_URL}/${adId}/details/`);
     const ad = result;
 
     return ad;
@@ -32,7 +32,7 @@ export const createAd = async (adData) => {
     // const { mainPhoto, ...rest } = adData;
     // const adDataPython = { main_photo: mainPhoto, ...rest };
 
-    const result = await request.post(`${BASE_URL}/create/`, adData);
+    const result = await request.post(`${ADS_BASE_URL}/create/`, adData);
     
     // const { main_photo, ...rest2 } = result;
     // const resultJS = { mainPhoto: main_photo, ...rest2 };
@@ -42,9 +42,9 @@ export const createAd = async (adData) => {
     return ad;
 }
 
-export const removeAd = async (adId) => await request.del(`${BASE_URL}/${adId}/delete`);
+export const removeAd = async (adId) => await request.del(`${ADS_BASE_URL}/${adId}/delete`);
 
-export const updateAd = async (adId, adData) => await request.put(`${BASE_URL}/${adId}/edit/`, adData);
+export const updateAd = async (adId, adData) => await request.put(`${ADS_BASE_URL}/${adId}/edit/`, adData);
 
 
 const adsAPI = {
