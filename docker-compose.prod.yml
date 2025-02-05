@@ -1,61 +1,16 @@
 services:
-    # postgres:
-    #     image: postgres:14
-    #     container_name: test_db_container
-    #     environment:
-    #         - POSTGRES_DB=test_db
-    #         - POSTGRES_USER=test_user
-    #         - POSTGRES_PASSWORD=test_password
-    #     volumes:
-    #         - test_db_data:/var/lib/postgresql/data
-    #     ports:
-    #         - 5432:5432
-    #     networks:
-    #         - adsbooknetwork
-        
     adsbookfrontend:
         build:
           context: .
           dockerfile: ./prod.Dockerfile
           target: frontend
-        # container_name: adsbook_fc
-        # networks:
-        #     - adsbooknetwork
-      
     adsbookbackend:   
         build:
           context: .
           dockerfile: ./prod.Dockerfile
-          target: backend
-        # container_name: adsbook_bc
-        # ports:
-        #     - 8000:8000
-        # env_file:
-        #     - ./backend/env/.env.prod
-        # depends_on:
-        #     - postgres
-        # networks:
-        #     - adsbooknetwork
-        
+          target: backend   
     nginx:
         build:
           dockerfile: ./prod.Dockerfile
           target: nginx
-#         container_name: adsbook_nginxc
-#         ports:
-#             - 80:80
-#         environment:
-#             - BACKEND_URL=http://adsbookbackend:8000
-#         depends_on:
-#             - adsbookbackend
-#             - adsbookfrontend
-#         networks:
-#             - adsbooknetwork
 
-# networks:
-#     adsbooknetwork:
-#         name: adsbooknetwork
-        
-# volumes:
-#     test_db_data:
-#         name: test_db_data
