@@ -21,7 +21,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
 
 
 CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS").split(" ")
-
+# CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_HEADERS = [
     "Authorization",
@@ -29,6 +29,12 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "WWW-Authenticate",
     "x-requested-with",
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "origin",
+    "access-control-allow-origin"
 ]
 
 
@@ -142,11 +148,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # STATICFILES_DIRS = (
 #     BASE_DIR / 'staticfiles',
 # )
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 MEDIA_URL = '/media/'
 

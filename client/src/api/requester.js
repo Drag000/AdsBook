@@ -15,7 +15,6 @@ async function requester(method, url, data) {
         options.method = method;
     } 
     
-    console.log('data', data)
 
     if (data) {
         if (data instanceof FormData) {
@@ -39,9 +38,8 @@ async function requester(method, url, data) {
     //     options.body = JSON.stringify(data);
     // }
     
-
-    console.log('data',data)
-    console.log('options',options)
+    // console.log('data',data)
+    // console.log('options',options)
     const response = await fetch(url, options);
    
     if (response.status === 204) {

@@ -10,6 +10,7 @@ export default function Ad({
   main_photo,
   price,
   location,
+  condition,
 }) {
 
   const { isAuthenticated } = useContext(AuthContext);
@@ -22,9 +23,10 @@ export default function Ad({
             <Image src={main_photo} rounded alt="photo"
               style={{
                 width: '100%',
-                maxWidth: '300px',
-                maxHeight: '233px',
-                objectFit: 'cover',
+                maxWidth: '400px',
+                maxHeight: '255px',
+                objectFit: 'contain',
+                objectPosition: 'center',  
                 borderRadius: '10px'
               }}
             />
@@ -51,11 +53,13 @@ export default function Ad({
                 <p>
                   <strong>Location:</strong> {location}
                 </p>
+                <p>
+                  <strong>Condition:</strong> {condition}
+                </p>
               </div>
 
               <Card.Text>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
+                
               </Card.Text>
 
               {isAuthenticated

@@ -1,0 +1,70 @@
+# Ignore node_modules (dependencies will be installed during build)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore temporary and cache files
+*.cache
+dist/
+build/
+*.log
+
+# Ignore editor/IDE settings
+*.vscode/
+*.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS and miscellaneous files
+.DS_Store
+Thumbs.db
+
+# Ignore git-related files
+.git
+.gitignore
+
+# Ignore Docker ignore file itself
+.dockerignore
+
+# Ignore Python cache and temporary files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.sqlite3
+
+
+# Ignore virtual environment
+venv/
+.env
+.env.prod
+
+# Ignore test-related files and folders
+tests/
+*.pytest_cache
+.coverage
+htmlcov/
+
+# Ignore Django static files (if collected during build)
+# static/
+
+# Ignore media files (if uploaded by users, handled outside Docker)
+mediafiles/
+
+# Ignore editor/IDE settings
+*.vscode/
+*.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS and miscellaneous files
+.DS_Store
+Thumbs.db
+*.log
+
+# Ignore git-related files
+.git
+.gitignore
+
+# Ignore Docker ignore file itself
+.dockerignore

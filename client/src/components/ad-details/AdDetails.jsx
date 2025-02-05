@@ -16,20 +16,17 @@ export default function AdDetails() {
     const [publisher, setPublisher] = useState({});
     const getProfileDetails = useGetProfileDetails()
 
-
     useEffect(() => {
         (async () => {
             const result = await adsAPI.getOneAd(adId);
-
             const result2 = await getProfileDetails(result.user)
+            
             setAd(result);
             setPublisher(result2);
         })();
     }, [adId]);
 
-
     const isOwner = userId === ad.user;
-
 
     return (
         <div className="my-5">
@@ -42,9 +39,10 @@ export default function AdDetails() {
                                     width: '100%',
                                     maxWidth: '400px',
                                     maxHeight: '255px',
-                                    objectFit: 'cover',
+                                    objectFit: 'contain',
+                                    objectPosition: 'center',  
                                     borderRadius: '10px'
-                                }}
+                                  }}
                             />
                         </Col>
                         <Col>

@@ -24,8 +24,6 @@ import ProfileDelete from './components/profile-delete/ProfileDelete';
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
-
-
   return (
     <AuthContextProvider>
       <Header />

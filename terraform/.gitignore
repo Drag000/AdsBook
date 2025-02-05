@@ -17,3 +17,5 @@ crash.log
 
 # Logs or debug output
 *.log
+
+values-me.tfvars
