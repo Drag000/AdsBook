@@ -21,7 +21,7 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y docker-compose
 
     - name: Build and Start Services
-      run: docker-compose -f docker-compose.yml up --build -d
+      run: docker-compose -f docker-compose.dev.yml up --build -d
 
     - name: Test container access
       run: docker exec adsbookbc echo "Container is running"
@@ -47,4 +47,4 @@ jobs:
 
     - name: Tear down Docker Compose
       if: always()
-      run: docker-compose -f docker-compose.yml down --volumes --remove-orphans
+      run: docker-compose -f docker-compose.dev.yml down --volumes --remove-orphans
